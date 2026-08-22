@@ -102,7 +102,6 @@ class OnboardingViewController: UIViewController {
     
     @objc func nextButtonTapped() {
         if currentPage == 0 {
-            print("=============")
             currentPage = 1
             collectionView.scrollToItem(at: IndexPath(item: currentPage, section: 0),
                                         at: .centeredHorizontally,

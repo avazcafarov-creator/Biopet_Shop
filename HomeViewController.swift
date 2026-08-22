@@ -8,6 +8,13 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    private var searchBar: UISearchBar = {
+       let searchBar = UISearchBar()
+        searchBar.placeholder = "Search"
+        searchBar.searchBarStyle = .minimal
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
     
     private lazy var categoryCollectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
@@ -29,11 +36,22 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        configureConstraints()
     }
     
     private func configureUI() {
         view.backgroundColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Profile", image: .init(systemName: "person.crop.circle.fill"), target: self, action: #selector(profileButtonTapped))
     }
+    
+    private func configureConstraints() {
+        
+    }
+    
+    @objc private func profileButtonTapped() {
+    }
+    
+    
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
