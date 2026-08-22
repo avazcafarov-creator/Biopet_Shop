@@ -8,25 +8,9 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-//    private var searchBar: UISearchBar = {
-//       let searchBar = UISearchBar()
-//        searchBar.placeholder = "Royal Canin, Sanicat, qurd dərmanı..."
-//        searchBar.searchTextField.font = .systemFont(ofSize: 12, weight: .regular)
-//        searchBar.searchBarStyle = .minimal
-//        searchBar.backgroundImage = UIImage()
-//        searchBar.searchTextField.backgroundColor = .whiteBiopet
-//        searchBar.searchTextField.layer.cornerRadius = 8
-//        searchBar.translatesAutoresizingMaskIntoConstraints = false
-//        return searchBar
-//    }()
     private lazy var profileIcon: UIImageView = {
         let profileIcon = UIImageView()
-        profileIcon.image = UIImage(named: "user_filled")?.withRenderingMode(.alwaysTemplate)
-        profileIcon.tintColor = .red
-        profileIcon.backgroundColor = .neuralGray
-        profileIcon.layer.borderWidth = 3
-        profileIcon.layer.borderColor = UIColor.neuralGray.cgColor
-        profileIcon.layer.cornerRadius = 16
+        profileIcon.image = .profileFilled
         profileIcon.heightAnchor.constraint(equalToConstant: 32).isActive = true
         profileIcon.widthAnchor.constraint(equalToConstant: 32).isActive = true
         profileIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +21,7 @@ class HomeViewController: UIViewController {
         let searchBar = UIView()
         searchBar.backgroundColor = .whiteBiopet
         searchBar.layer.cornerRadius = 8
+        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
@@ -44,8 +29,9 @@ class HomeViewController: UIViewController {
     private lazy var searchBarImageView: UIImageView = {
         let searchBarImageView = UIImageView()
         searchBarImageView.contentMode = .scaleAspectFit
-        searchBarImageView.tintColor = .neuralGray
-        searchBarImageView.image = UIImage(systemName: "search")
+        searchBarImageView.image = .search
+        searchBarImageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        searchBarImageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
         searchBarImageView.translatesAutoresizingMaskIntoConstraints = false
         return searchBarImageView
     }()
@@ -99,10 +85,32 @@ class HomeViewController: UIViewController {
     
     private func configureConstraints() {
         view.addSubview(profileIcon)
+        view.addSubview(notificationButton)
+        view.addSubview(searchBar)
+        view.addSubview(searchBarImageView)
+        view.addSubview(searchBarTextField)
+        view.addSubview(categoryCollectionView)
         
         NSLayoutConstraint.activate([
-            profileIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: 64),
-            profileIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            profileIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: 68),
+            profileIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            notificationButton.topAnchor.constraint(equalTo: profileIcon.bottomAnchor, constant: 16),
+            notificationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            searchBar.topAnchor.constraint(equalTo: notificationButton.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: notificationButton.leadingAnchor, constant: -12),
+            
+            searchBarImageView.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor),
+            searchBarImageView.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor, constant: 12),
+            
+            searchBarTextField.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor),
+            searchBarTextField.leadingAnchor.constraint(equalTo: searchBarImageView.trailingAnchor, constant: 8),
+            
+            categoryCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
+            categoryCollectionView.bottomAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
+            categoryCollectionView.heightAnchor.constraint(equalToConstant: 124),
         ])
     }
     
