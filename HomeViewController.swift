@@ -58,9 +58,10 @@ class HomeViewController: UIViewController {
     
     private lazy var categoryCollectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
         layout.minimumInteritemSpacing = 12
+        layout.itemSize = CGSize(width: 76, height: 124)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
@@ -77,6 +78,7 @@ class HomeViewController: UIViewController {
 
         configureUI()
         configureConstraints()
+        getCategoryItems()
     }
     
     private func configureUI() {
@@ -109,7 +111,8 @@ class HomeViewController: UIViewController {
             searchBarTextField.leadingAnchor.constraint(equalTo: searchBarImageView.trailingAnchor, constant: 8),
             
             categoryCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
-            categoryCollectionView.bottomAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
+            categoryCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             categoryCollectionView.heightAnchor.constraint(equalToConstant: 124),
         ])
     }
@@ -117,7 +120,16 @@ class HomeViewController: UIViewController {
     @objc private func profileButtonTapped() {
     }
     
-    
+    private func getCategoryItems() {
+        guard let url = Bundle.main.url(forResource: "Category", withExtension: "json") else {return}
+        do {
+            let data = try Data(contentsOf: url)
+                    categoryItems = try JSONDecoder().decode([CategoryModel].self, from: data)
+                    categoryCollectionView.reloadData()
+        } catch {
+            print("== \(error.localizedDescription) ==")
+        }
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

@@ -27,6 +27,7 @@ class CategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -47,7 +48,8 @@ class CategoryCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             backgroundFrame.topAnchor.constraint(equalTo: topAnchor),
-            backgroundFrame.widthAnchor.constraint(equalTo: widthAnchor, constant: 112),
+            backgroundFrame.widthAnchor.constraint(equalToConstant: 112),
+            backgroundFrame.centerXAnchor.constraint(equalTo: centerXAnchor),
             backgroundFrame.heightAnchor.constraint(equalToConstant: 96),
             
             imageView.centerXAnchor.constraint(equalTo: backgroundFrame.centerXAnchor),

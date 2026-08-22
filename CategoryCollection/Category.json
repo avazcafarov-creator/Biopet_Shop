@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Endirimlər",
+        "image": "discount"
+    },
+    {
+        "name": "Pişiklər",
+        "image": "cat"
+    },
+    {
+        "name": "İtlər",
+        "image": "dog"
+    },
+    {
+        "name": "Quşlar",
+        "image": "bird"
+    },
+    {
+        "name": "Balıqlar",
+        "image": "fish"
+    }
+]
