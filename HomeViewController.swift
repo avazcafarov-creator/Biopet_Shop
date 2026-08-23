@@ -144,6 +144,53 @@ class HomeViewController: UIViewController {
         return qrCodeImageView
     }()
     
+    private lazy var choosenProductLabelHeadLine: UILabel = {
+        let choosenProductHeadLine = UILabel()
+        choosenProductHeadLine.text = "Seçilmiş məhsullar"
+        choosenProductHeadLine.font = .systemFont(ofSize: 16, weight: .bold)
+        choosenProductHeadLine.textColor = .black
+        choosenProductHeadLine.translatesAutoresizingMaskIntoConstraints = false
+        return choosenProductHeadLine
+    }()
+    
+    private lazy var choosenProductLabelDescription: UILabel = {
+        let choosenProductlabelDescription = UILabel()
+        choosenProductlabelDescription.text = "Sizin ev heyvanlarınız üçün"
+        choosenProductlabelDescription.font = .systemFont(ofSize: 12, weight: .regular)
+        choosenProductlabelDescription.textColor = .neuralGray
+        choosenProductlabelDescription.translatesAutoresizingMaskIntoConstraints = false
+        return choosenProductlabelDescription
+    }()
+    
+    private lazy var choosenProductTextLabelStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [choosenProductLabelHeadLine, choosenProductLabelDescription])
+        stackView.axis = .vertical
+        stackView.spacing = 2
+        stackView.distribution = .fillEqually
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var arrowBackgroundView: UIView = {
+        let arrowBackgroundView = UIView()
+        arrowBackgroundView.backgroundColor = .whiteBiopet
+        arrowBackgroundView.layer.cornerRadius = 8
+        arrowBackgroundView.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        arrowBackgroundView.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        arrowBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        return arrowBackgroundView
+    }()
+    
+    private lazy var arrowIconImageView: UIImageView = {
+        let arrowIconImageView = UIImageView()
+        arrowIconImageView.image = .arrow
+        arrowIconImageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        arrowIconImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        arrowIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        return arrowIconImageView
+    }()
+    
     var categoryItems: [CategoryModel] = []
 
     override func viewDidLoad() {
@@ -172,6 +219,9 @@ class HomeViewController: UIViewController {
         view.addSubview(bannerBodyText)
         view.addSubview(qrCodeBackgroundView)
         view.addSubview(qrCodeImageView)
+        view.addSubview(choosenProductTextLabelStackView)
+        view.addSubview(arrowBackgroundView)
+        arrowBackgroundView.addSubview(arrowIconImageView)
         
         NSLayoutConstraint.activate([
             profileIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: 68),
@@ -217,6 +267,15 @@ class HomeViewController: UIViewController {
             
             qrCodeImageView.centerXAnchor.constraint(equalTo: qrCodeBackgroundView.centerXAnchor),
             qrCodeImageView.centerYAnchor.constraint(equalTo: qrCodeBackgroundView.centerYAnchor),
+            
+            choosenProductTextLabelStackView.topAnchor.constraint(equalTo: bannerBackground.bottomAnchor, constant: 24),
+            choosenProductTextLabelStackView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
+            
+            arrowBackgroundView.topAnchor.constraint(equalTo: choosenProductTextLabelStackView.topAnchor),
+            arrowBackgroundView.trailingAnchor.constraint(equalTo: bannerBackground.trailingAnchor),
+            
+            arrowIconImageView.centerXAnchor.constraint(equalTo: arrowBackgroundView.centerXAnchor),
+            arrowIconImageView.centerYAnchor.constraint(equalTo: arrowBackgroundView.centerYAnchor),
         ])
     }
     
