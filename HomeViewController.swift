@@ -110,6 +110,30 @@ class HomeViewController: UIViewController {
         return qrCodeBackgroundView
     }()
     
+    private lazy var heartIconBannerBackground: UIImageView = {
+        let heartIcon = UIImageView()
+        heartIcon.image = UIImage(named: "favorite_filled")?.withRenderingMode(.alwaysTemplate)
+        heartIcon.tintColor = .blueDark
+        heartIcon.contentMode = .scaleAspectFit
+        heartIcon.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        heartIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        heartIcon.transform = CGAffineTransform(rotationAngle: .pi / 5)
+        heartIcon.translatesAutoresizingMaskIntoConstraints = false
+        return heartIcon
+    }()
+    
+    private lazy var cloudIconBannerBackground: UIImageView = {
+        let cloudIcon = UIImageView()
+        cloudIcon.image = UIImage(named: "cloud_filled")?.withRenderingMode(.alwaysTemplate)
+        cloudIcon.tintColor = .blueDark
+        cloudIcon.contentMode = .scaleAspectFill
+        cloudIcon.clipsToBounds = true
+        cloudIcon.heightAnchor.constraint(equalToConstant: 124).isActive = true
+        cloudIcon.widthAnchor.constraint(equalToConstant: 144).isActive = true
+        cloudIcon.translatesAutoresizingMaskIntoConstraints = false
+        return cloudIcon
+    }()
+    
     private lazy var qrCodeImageView: UIImageView = {
         let qrCodeImageView = UIImageView()
         qrCodeImageView.image = UIImage(named: "scan_qr_filled")?
@@ -146,6 +170,8 @@ class HomeViewController: UIViewController {
         view.addSubview(bannerBackground)
         view.addSubview(bannerHeadText)
         view.addSubview(bannerBodyText)
+        view.addSubview(heartIconBannerBackground)
+        view.addSubview(cloudIconBannerBackground)
         view.addSubview(qrCodeBackgroundView)
         view.addSubview(qrCodeImageView)
         
@@ -174,6 +200,12 @@ class HomeViewController: UIViewController {
             bannerBackground.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
             bannerBackground.trailingAnchor.constraint(equalTo: notificationButton.trailingAnchor),
             bannerBackground.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 24),
+            
+            heartIconBannerBackground.topAnchor.constraint(equalTo: bannerBackground.topAnchor, constant: 12),
+            heartIconBannerBackground.leadingAnchor.constraint(equalTo: bannerBackground.leadingAnchor, constant: 112),
+            
+            cloudIconBannerBackground.bottomAnchor.constraint(equalTo: bannerBackground.bottomAnchor),
+            cloudIconBannerBackground.trailingAnchor.constraint(equalTo: bannerBackground.trailingAnchor),
             
             bannerHeadText.topAnchor.constraint(equalTo: bannerBackground.topAnchor, constant: 16),
             bannerHeadText.leadingAnchor.constraint(equalTo: bannerBackground.leadingAnchor, constant: 16),
