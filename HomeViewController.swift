@@ -91,7 +91,7 @@ class HomeViewController: UIViewController {
     
     private lazy var bannerBodyText: UILabel = {
         let bannerBodyText = UILabel()
-        bannerBodyText.text = "Barkodu filiallarımızda satıcıya təqdim edin."
+        bannerBodyText.text = "Barkodu filiallarımızda satıcıya\ntəqdim edin."
         bannerBodyText.textColor = .white
         bannerBodyText.font = .systemFont(ofSize: 12, weight: .regular)
         bannerBodyText.numberOfLines = 2
@@ -112,7 +112,8 @@ class HomeViewController: UIViewController {
     
     private lazy var qrCodeImageView: UIImageView = {
         let qrCodeImageView = UIImageView()
-        qrCodeImageView.image = .scanQrFilled
+        qrCodeImageView.image = UIImage(named: "scan_qr_filled")?
+            .withRenderingMode(.alwaysTemplate)
         qrCodeImageView.tintColor = .white
         qrCodeImageView.contentMode = .scaleAspectFit
         qrCodeImageView.heightAnchor.constraint(equalToConstant: 36).isActive = true
