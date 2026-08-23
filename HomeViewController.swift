@@ -74,6 +74,7 @@ class HomeViewController: UIViewController {
     private lazy var bannerBackground: UIView = {
         let bannerBackground = UIView()
         bannerBackground.backgroundColor = .blueBiopet
+        bannerBackground.clipsToBounds = true
         bannerBackground.layer.cornerRadius = 12
         bannerBackground.heightAnchor.constraint(equalToConstant: 88).isActive = true
         bannerBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -126,10 +127,7 @@ class HomeViewController: UIViewController {
         let cloudIcon = UIImageView()
         cloudIcon.image = UIImage(named: "cloud_filled")?.withRenderingMode(.alwaysTemplate)
         cloudIcon.tintColor = .blueDark
-        cloudIcon.contentMode = .scaleAspectFill
-        cloudIcon.clipsToBounds = true
-        cloudIcon.heightAnchor.constraint(equalToConstant: 124).isActive = true
-        cloudIcon.widthAnchor.constraint(equalToConstant: 144).isActive = true
+        cloudIcon.contentMode = .scaleAspectFit
         cloudIcon.translatesAutoresizingMaskIntoConstraints = false
         return cloudIcon
     }()
@@ -168,10 +166,10 @@ class HomeViewController: UIViewController {
         view.addSubview(searchBarTextField)
         view.addSubview(categoryCollectionView)
         view.addSubview(bannerBackground)
+        view.addSubview(heartIconBannerBackground)
+        bannerBackground.addSubview(cloudIconBannerBackground)
         view.addSubview(bannerHeadText)
         view.addSubview(bannerBodyText)
-        view.addSubview(heartIconBannerBackground)
-        view.addSubview(cloudIconBannerBackground)
         view.addSubview(qrCodeBackgroundView)
         view.addSubview(qrCodeImageView)
         
@@ -205,6 +203,7 @@ class HomeViewController: UIViewController {
             heartIconBannerBackground.leadingAnchor.constraint(equalTo: bannerBackground.leadingAnchor, constant: 112),
             
             cloudIconBannerBackground.bottomAnchor.constraint(equalTo: bannerBackground.bottomAnchor),
+            cloudIconBannerBackground.topAnchor.constraint(equalTo: bannerBackground.topAnchor),
             cloudIconBannerBackground.trailingAnchor.constraint(equalTo: bannerBackground.trailingAnchor),
             
             bannerHeadText.topAnchor.constraint(equalTo: bannerBackground.topAnchor, constant: 16),
