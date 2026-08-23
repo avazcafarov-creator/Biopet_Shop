@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
         layout.minimumInteritemSpacing = 12
-        layout.itemSize = CGSize(width: 76, height: 124)
+        layout.itemSize = CGSize(width: 112, height: 124)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
@@ -69,6 +69,56 @@ class HomeViewController: UIViewController {
         cv.delegate = self
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
+    }()
+    
+    private lazy var bannerBackground: UIView = {
+        let bannerBackground = UIView()
+        bannerBackground.backgroundColor = .blueBiopet
+        bannerBackground.layer.cornerRadius = 12
+        bannerBackground.heightAnchor.constraint(equalToConstant: 88).isActive = true
+        bannerBackground.translatesAutoresizingMaskIntoConstraints = false
+        return bannerBackground
+    }()
+    
+    private lazy var bannerHeadText: UILabel = {
+        let bannerHeadText = UILabel()
+        bannerHeadText.text = "Bonus kartınız"
+        bannerHeadText.textColor = .white
+        bannerHeadText.font = .systemFont(ofSize: 16, weight: .medium)
+        bannerHeadText.translatesAutoresizingMaskIntoConstraints = false
+        return bannerHeadText
+    }()
+    
+    private lazy var bannerBodyText: UILabel = {
+        let bannerBodyText = UILabel()
+        bannerBodyText.text = "Barkodu filiallarımızda satıcıya təqdim edin."
+        bannerBodyText.textColor = .white
+        bannerBodyText.font = .systemFont(ofSize: 12, weight: .regular)
+        bannerBodyText.numberOfLines = 2
+        bannerBodyText.lineBreakMode = .byWordWrapping
+        bannerBodyText.translatesAutoresizingMaskIntoConstraints = false
+        return bannerBodyText
+    }()
+    
+    private lazy var qrCodeBackgroundView: UIView = {
+        let qrCodeBackgroundView = UIView()
+        qrCodeBackgroundView.layer.cornerRadius = 8
+        qrCodeBackgroundView.backgroundColor = .blueBiopet
+        qrCodeBackgroundView.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        qrCodeBackgroundView.widthAnchor.constraint(equalToConstant: 56).isActive = true
+        qrCodeBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        return qrCodeBackgroundView
+    }()
+    
+    private lazy var qrCodeImageView: UIImageView = {
+        let qrCodeImageView = UIImageView()
+        qrCodeImageView.image = .scanQrFilled
+        qrCodeImageView.tintColor = .white
+        qrCodeImageView.contentMode = .scaleAspectFit
+        qrCodeImageView.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        qrCodeImageView.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        qrCodeImageView.translatesAutoresizingMaskIntoConstraints = false
+        return qrCodeImageView
     }()
     
     var categoryItems: [CategoryModel] = []
@@ -92,6 +142,11 @@ class HomeViewController: UIViewController {
         view.addSubview(searchBarImageView)
         view.addSubview(searchBarTextField)
         view.addSubview(categoryCollectionView)
+        view.addSubview(bannerBackground)
+        view.addSubview(bannerHeadText)
+        view.addSubview(bannerBodyText)
+        view.addSubview(qrCodeBackgroundView)
+        view.addSubview(qrCodeImageView)
         
         NSLayoutConstraint.activate([
             profileIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: 68),
@@ -114,6 +169,22 @@ class HomeViewController: UIViewController {
             categoryCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
             categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             categoryCollectionView.heightAnchor.constraint(equalToConstant: 124),
+            
+            bannerBackground.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
+            bannerBackground.trailingAnchor.constraint(equalTo: notificationButton.trailingAnchor),
+            bannerBackground.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 24),
+            
+            bannerHeadText.topAnchor.constraint(equalTo: bannerBackground.topAnchor, constant: 16),
+            bannerHeadText.leadingAnchor.constraint(equalTo: bannerBackground.leadingAnchor, constant: 16),
+            
+            bannerBodyText.topAnchor.constraint(equalTo: bannerHeadText.bottomAnchor, constant: 4),
+            bannerBodyText.leadingAnchor.constraint(equalTo: bannerHeadText.leadingAnchor),
+            
+            qrCodeBackgroundView.centerYAnchor.constraint(equalTo: bannerBackground.centerYAnchor),
+            qrCodeBackgroundView.trailingAnchor.constraint(equalTo: bannerBackground.trailingAnchor, constant: -16),
+            
+            qrCodeImageView.centerXAnchor.constraint(equalTo: qrCodeBackgroundView.centerXAnchor),
+            qrCodeImageView.centerYAnchor.constraint(equalTo: qrCodeBackgroundView.centerYAnchor),
         ])
     }
     

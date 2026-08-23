@@ -10,7 +10,7 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     private var backgroundFrame: UIView = {
         let shape = UIView()
-        shape.backgroundColor = .blueLight
+        shape.backgroundColor = .categoryBackground
         shape.layer.cornerRadius = 12
         shape.translatesAutoresizingMaskIntoConstraints = false
         return shape
@@ -49,11 +49,13 @@ class CategoryCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             backgroundFrame.topAnchor.constraint(equalTo: topAnchor),
             backgroundFrame.widthAnchor.constraint(equalToConstant: 112),
-            backgroundFrame.centerXAnchor.constraint(equalTo: centerXAnchor),
             backgroundFrame.heightAnchor.constraint(equalToConstant: 96),
+            backgroundFrame.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             imageView.centerXAnchor.constraint(equalTo: backgroundFrame.centerXAnchor),
             imageView.bottomAnchor.constraint(equalTo: backgroundFrame.bottomAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 84),
+            imageView.widthAnchor.constraint(equalToConstant: 104),
             
             titleText.centerXAnchor.constraint(equalTo: backgroundFrame.centerXAnchor),
             titleText.topAnchor.constraint(equalTo: backgroundFrame.bottomAnchor, constant: 8)
