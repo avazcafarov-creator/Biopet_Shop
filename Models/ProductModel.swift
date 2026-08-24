@@ -10,6 +10,7 @@ import Foundation
 struct Product: Codable {
     let category: Category
     let name: String
+    let image: String
     let description: String
     let rating: String
     let price: String

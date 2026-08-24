@@ -1,0 +1,290 @@
+[
+    {
+        "category": "cat",
+        "name": "Applaws Tuna Fillet",
+        "image": "Applaws Tuna Fillet",
+        "description": "Sosda tuna filesi, taxılsız, təbii tərkib.",
+        "rating": "4.5",
+        "price": "12.90",
+        "id": "cat-001"
+    },
+    {
+        "category": "cat",
+        "name": "Felix Doubly Delicious",
+        "image": "Felix Doubly Delicious",
+        "description": "Balıqlı və toyuqlu qarışıq konservə yem.",
+        "rating": "4.3",
+        "price": "9.50",
+        "id": "cat-002"
+    },
+    {
+        "category": "cat",
+        "name": "Royal Canin Kitten",
+        "image": "Royal Canin Kitten",
+        "description": "12 aya qədər pişik balaları üçün quru yem.",
+        "rating": "4.7",
+        "price": "38.00",
+        "id": "cat-003"
+    },
+    {
+        "category": "cat",
+        "name": "Whiskas Adult",
+        "image": "Whiskas Adult",
+        "description": "Yetkin pişiklər üçün toyuqlu quru yem, 1.9 kg.",
+        "rating": "4.2",
+        "price": "22.40",
+        "id": "cat-004"
+    },
+    {
+        "category": "cat",
+        "name": "Sanicat Kedi Kumu",
+        "image": "Sanicat Kedi Kumu",
+        "description": "İyə qarşı toplanan bentonit pişik qumu, 10L.",
+        "rating": "4.6",
+        "price": "15.00",
+        "id": "cat-005"
+    },
+    {
+        "category": "cat",
+        "name": "Purina ONE Sterilized",
+        "image": "Purina ONE Sterilized",
+        "description": "Sterilizasiya olunmuş pişiklər üçün xüsusi formul.",
+        "rating": "4.4",
+        "price": "27.80",
+        "id": "cat-006"
+    },
+    {
+        "category": "cat",
+        "name": "Gimcat Malt-Soft Paste",
+        "image": "Gimcat Malt-Soft Paste",
+        "description": "Tükləri təmizləyən vitaminli pasta, 50g.",
+        "rating": "4.1",
+        "price": "6.90",
+        "id": "cat-007"
+    },
+    {
+        "category": "cat",
+        "name": "Trixie Cat Toy Mouse",
+        "image": "Trixie Cat Toy Mouse",
+        "description": "Catnip dolğulu oyuncaq siçan, pişiklər üçün.",
+        "rating": "4.0",
+        "price": "3.50",
+        "id": "cat-008"
+    },
+    {
+        "category": "dog",
+        "name": "Pedigree Adult Beef",
+        "image": "Pedigree Adult Beef",
+        "description": "Mal əti ilə yetkin itlər üçün quru yem, 3kg.",
+        "rating": "4.3",
+        "price": "24.90",
+        "id": "dog-001"
+    },
+    {
+        "category": "dog",
+        "name": "Royal Canin Medium Puppy",
+        "image": "Royal Canin Medium Puppy",
+        "description": "Orta cinslər üçün küçük yaşı yemi.",
+        "rating": "4.8",
+        "price": "42.00",
+        "id": "dog-002"
+    },
+    {
+        "category": "dog",
+        "name": "Pro Plan Sensitive Skin",
+        "image": "Pro Plan Sensitive Skin",
+        "description": "Həssas dərili itlər üçün losos əsaslı yem.",
+        "rating": "4.6",
+        "price": "48.50",
+        "id": "dog-003"
+    },
+    {
+        "category": "dog",
+        "name": "Cesar Konserva Toyuqlu",
+        "image": "Cesar Konserva Toyuqlu",
+        "description": "Kiçik cins itlər üçün yumşaq konservə, 150g.",
+        "rating": "4.2",
+        "price": "5.20",
+        "id": "dog-004"
+    },
+    {
+        "category": "dog",
+        "name": "Kong Classic Toy",
+        "image": "Kong Classic Toy",
+        "description": "Dayanıqlı rezin çeynəmə oyuncağı, orta ölçü.",
+        "rating": "4.7",
+        "price": "18.00",
+        "id": "dog-005"
+    },
+    {
+        "category": "dog",
+        "name": "Trixie İt Boyunbağı",
+        "image": "Trixie İt Boyunbağı",
+        "description": "Nylon tənzimlənən boyunbağı, orta cinslər üçün.",
+        "rating": "4.0",
+        "price": "9.90",
+        "id": "dog-006"
+    },
+    {
+        "category": "dog",
+        "name": "Vitakraft Dental Stick",
+        "image": "Vitakraft Dental Stick",
+        "description": "Diş sağlamlığı üçün çeynəmə çubuğu, 7 ədəd.",
+        "rating": "4.4",
+        "price": "7.60",
+        "id": "dog-007"
+    },
+    {
+        "category": "dog",
+        "name": "Hill's Science Diet Senior",
+        "image": "Hill's Science Diet Senior",
+        "description": "Yaşlı itlər üçün oynaq dəstəkli xüsusi yem.",
+        "rating": "4.9",
+        "price": "55.00",
+        "id": "dog-008"
+    },
+    {
+        "category": "bird",
+        "name": "Versele-Laga Prestige",
+        "image": "Versele-Laga Prestige",
+        "description": "Kanareykalar üçün qarışıq toxum yemi, 1kg.",
+        "rating": "4.5",
+        "price": "11.20",
+        "id": "bird-001"
+    },
+    {
+        "category": "bird",
+        "name": "Vitakraft Menu Vital",
+        "image": "Vitakraft Menu Vital",
+        "description": "Tutuquşular üçün vitaminli toxum qarışığı.",
+        "rating": "4.3",
+        "price": "9.80",
+        "id": "bird-002"
+    },
+    {
+        "category": "bird",
+        "name": "Padovan Grit Calcio",
+        "image": "Padovan Grit Calcio",
+        "description": "Quşlar üçün kalsiumlu daş-çınqıl qarışığı.",
+        "rating": "4.1",
+        "price": "4.50",
+        "id": "bird-003"
+    },
+    {
+        "category": "bird",
+        "name": "Trixie Quş Yuvası",
+        "image": "Trixie Quş Yuvası",
+        "description": "Taxta kiçik quş yuvası, asma tipli.",
+        "rating": "4.6",
+        "price": "14.00",
+        "id": "bird-004"
+    },
+    {
+        "category": "bird",
+        "name": "Beaphar Bird Vitamin",
+        "image": "Beaphar Bird Vitamin",
+        "description": "Quşlar üçün su ilə qarışdırılan vitamin damcı.",
+        "rating": "4.2",
+        "price": "6.30",
+        "id": "bird-005"
+    },
+    {
+        "category": "bird",
+        "name": "Cede Honey Sticks",
+        "image": "Cede Honey Sticks",
+        "description": "Balla örtülmüş toxum çubuğu, 2 ədəd.",
+        "rating": "4.4",
+        "price": "3.90",
+        "id": "bird-006"
+    },
+    {
+        "category": "bird",
+        "name": "Versele-Laga Cage Perch",
+        "image": "Versele-Laga Cage Perch",
+        "description": "Taxta oturacaq çubuğu, qəfəs üçün.",
+        "rating": "4.0",
+        "price": "5.10",
+        "id": "bird-007"
+    },
+    {
+        "category": "bird",
+        "name": "Padovan Quş Qəfəsi",
+        "image": "Padovan Quş Qəfəsi",
+        "description": "Kiçik ölçülü metal quş qəfəsi.",
+        "rating": "4.7",
+        "price": "32.00",
+        "id": "bird-008"
+    },
+    {
+        "category": "fish",
+        "name": "Tetra Min Flakes",
+        "image": "Tetra Min Flakes",
+        "description": "Bütün akvarium balıqları üçün pulcuqlu yem, 100ml.",
+        "rating": "4.5",
+        "price": "8.70",
+        "id": "fish-001"
+    },
+    {
+        "category": "fish",
+        "name": "Sera Vipan Balık Yemi",
+        "image": "Sera Vipan Balık Yemi",
+        "description": "Tropik balıqlar üçün əsas pulcuqlu yem.",
+        "rating": "4.3",
+        "price": "7.40",
+        "id": "fish-002"
+    },
+    {
+        "category": "fish",
+        "name": "JBL NovoBel",
+        "image": "JBL NovoBel",
+        "description": "Bütün akvarium balıqları üçün əsas qida, 250ml.",
+        "rating": "4.6",
+        "price": "10.90",
+        "id": "fish-003"
+    },
+    {
+        "category": "fish",
+        "name": "Tetra AlgaeControl",
+        "image": "Tetra AlgaeControl",
+        "description": "Akvariumda yosun artımını azaldan məhlul.",
+        "rating": "4.1",
+        "price": "13.50",
+        "id": "fish-004"
+    },
+    {
+        "category": "fish",
+        "name": "Aquael Su Filtri",
+        "image": "Aquael Su Filtri",
+        "description": "Kiçik akvariumlar üçün daxili su filtri.",
+        "rating": "4.8",
+        "price": "29.00",
+        "id": "fish-005"
+    },
+    {
+        "category": "fish",
+        "name": "Sera Su Şərtləndirici",
+        "image": "Sera Su Şərtləndirici",
+        "description": "Çeşmə suyunu akvarium üçün hazırlayan damcı.",
+        "rating": "4.4",
+        "price": "6.20",
+        "id": "fish-006"
+    },
+    {
+        "category": "fish",
+        "name": "Tetra Dekorativ Bitki",
+        "image": "Tetra Dekorativ Bitki",
+        "description": "Süni akvarium bitkisi, orta ölçü.",
+        "rating": "4.0",
+        "price": "4.80",
+        "id": "fish-007"
+    },
+    {
+        "category": "fish",
+        "name": "JBL Termometr",
+        "image": "JBL Termometr",
+        "description": "Akvarium suyu üçün yapışqanlı termometr.",
+        "rating": "4.2",
+        "price": "2.90",
+        "id": "fish-008"
+    }
+]
