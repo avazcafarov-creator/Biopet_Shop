@@ -191,7 +191,41 @@ class HomeViewController: UIViewController {
         return arrowIconImageView
     }()
     
+    private lazy var petCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 32
+        layout.minimumInteritemSpacing = 12
+        
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(PetCell.self, forCellWithReuseIdentifier: "PetCell")
+        cv.dataSource = self
+        cv.delegate = self
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
+    
+    private lazy var productCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 12
+        layout.minimumInteritemSpacing = 12
+        
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell")
+        cv.dataSource = self
+        cv.delegate = self
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
+    
     var categoryItems: [CategoryModel] = []
+    
+    var pets: [Pet] = []
+    
+    var allProducts: [ProductModel] = []
+    var filteredProducts: [ProductModel] = []
+    var selectedPetIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,6 +233,7 @@ class HomeViewController: UIViewController {
         configureUI()
         configureConstraints()
         getCategoryItems()
+        filterProducts()
     }
     
     private func configureUI() {
@@ -292,16 +327,58 @@ class HomeViewController: UIViewController {
             print("== \(error.localizedDescription) ==")
         }
     }
+    
+    private func filterProducts() {
+        let selectedCategory = pets[selectedPetIndex].category
+        filteredProducts = allProducts.filter { $0.category == selectedCategory }
+        productCollectionView.reloadData()
+    }
+    
+    private func getProducts() {
+        guard let url = Bundle.main.url(forResource: "Product", withExtension: "json") else {return}
+        do {
+            let data = try Data(contentsOf: url)
+            allProducts = try JSONDecoder().decode([ProductModel].self, from: data)
+            productCollectionView.reloadData()
+        } catch {
+            print("== \(error.localizedDescription) ==")
+        }
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == petCollectionView {
+            selectedPetIndex = indexPath.row
+            petCollectionView.reloadData()
+            filterProducts()
+        }
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categoryItems.count
+        if collectionView == categoryCollectionView {
+           return categoryItems.count
+        } else if collectionView == productCollectionView {
+            return filteredProducts.count
+        } else {
+            return pets.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-        cell.configure(with: categoryItems[indexPath.row])
-        return cell
+        if collectionView == categoryCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+            cell.configure(with: categoryItems[indexPath.row])
+            return cell
+        } else if collectionView == productCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
+            cell.configure(with: filteredProducts[indexPath.row])
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetCell", for: indexPath) as! PetCell
+            let isThisSelected = (indexPath.row == selectedPetIndex)
+            cell.configure(name: pets[indexPath.row].name, isSelected: isThisSelected)
+            return cell
+        }
     }
 }

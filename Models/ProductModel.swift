@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Product: Codable {
+struct ProductModel: Codable {
     let category: Category
     let name: String
     let image: String
@@ -16,11 +16,3 @@ struct Product: Codable {
     let price: String
     let id: String
 }
-
-enum Category: String, Codable {
-    case cat
-    case dog
-    case bird
-    case fish
-}
-
