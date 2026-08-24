@@ -257,6 +257,8 @@ class HomeViewController: UIViewController {
         view.addSubview(choosenProductTextLabelStackView)
         view.addSubview(arrowBackgroundView)
         arrowBackgroundView.addSubview(arrowIconImageView)
+        view.addSubview(petCollectionView)
+        view.addSubview(productCollectionView)
         
         NSLayoutConstraint.activate([
             profileIcon.topAnchor.constraint(equalTo: view.topAnchor, constant: 68),
@@ -315,6 +317,10 @@ class HomeViewController: UIViewController {
             petCollectionView.topAnchor.constraint(equalTo: choosenProductLabelDescription.bottomAnchor, constant: 12),
             petCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
             petCollectionView.heightAnchor.constraint(equalToConstant: 40),
+            
+            productCollectionView.topAnchor.constraint(equalTo: petCollectionView.bottomAnchor, constant: 12),
+            productCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
+            productCollectionView.heightAnchor.constraint(equalToConstant: 312),
         ])
     }
     
