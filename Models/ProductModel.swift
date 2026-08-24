@@ -16,7 +16,10 @@ struct Product: Codable {
     let id: String
 }
 
-struct Category: Codable {
-    
+enum Category: String, Codable {
+    case cat
+    case dog
+    case bird
+    case fish
 }
 
