@@ -24,15 +24,6 @@ class PetCell: UICollectionViewCell {
         return petName
     }()
     
-    private lazy var seperator: UILabel = {
-        let seperator = UILabel()
-        seperator.text = "|"
-        seperator.font = .systemFont(ofSize: 12, weight: .medium)
-        seperator.textColor = .neuralGray
-        seperator.translatesAutoresizingMaskIntoConstraints = false
-        return seperator
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -42,18 +33,15 @@ class PetCell: UICollectionViewCell {
     private func configureConstraints() {
         addSubview(backgroundContainer)
         backgroundContainer.addSubview(petNameLabel)
-        backgroundContainer.addSubview(seperator)
         
         NSLayoutConstraint.activate([
             backgroundContainer.topAnchor.constraint(equalTo: topAnchor),
             backgroundContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundContainer.heightAnchor.constraint(equalTo: heightAnchor),
+            backgroundContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             petNameLabel.centerYAnchor.constraint(equalTo: backgroundContainer.centerYAnchor),
             petNameLabel.centerXAnchor.constraint(equalTo: backgroundContainer.centerXAnchor),
-            
-            seperator.centerYAnchor.constraint(equalTo: backgroundContainer.centerYAnchor),
-            seperator.leadingAnchor.constraint(equalTo: petNameLabel.trailingAnchor, constant: 4),
         ])
     }
     
@@ -61,11 +49,13 @@ class PetCell: UICollectionViewCell {
         petNameLabel.text = name
         
         if isSelected {
-            backgroundColor = .white
-            layer.shadowOpacity = 0.15
+            backgroundContainer.backgroundColor = .white
+            backgroundContainer.layer.shadowOpacity = 0.15
+            backgroundContainer.layer.shadowRadius = 4
+            backgroundContainer.layer.shadowOffset = CGSize(width: 0, height: 2)
         } else {
-            backgroundColor = .clear
-            layer.shadowOpacity = 0
+            backgroundContainer.backgroundColor = .whiteBiopet
+            backgroundContainer.layer.shadowOpacity = 0
         }
     }
     

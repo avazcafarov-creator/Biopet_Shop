@@ -32,8 +32,7 @@ class ProductCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "heart")?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .neuralGray
-        imageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -67,7 +66,7 @@ class ProductCell: UICollectionViewCell {
     
     private lazy var ratingIcon: UIImageView = {
         let ratingIcon = UIImageView()
-        ratingIcon.image = UIImage(systemName: "star.filled")?.withRenderingMode(.alwaysTemplate)
+        ratingIcon.image = UIImage(named: "star_filled")?.withRenderingMode(.alwaysTemplate)
         ratingIcon.tintColor = .blueBiopet
         ratingIcon.heightAnchor.constraint(equalToConstant: 12).isActive = true
         ratingIcon.widthAnchor.constraint(equalToConstant: 12).isActive = true
@@ -86,6 +85,7 @@ class ProductCell: UICollectionViewCell {
     private lazy var cartButtonBackground: UIView = {
        let buttonBackground = UIView()
         buttonBackground.backgroundColor = .blueBiopet
+        buttonBackground.layer.cornerRadius = 8
         buttonBackground.heightAnchor.constraint(equalToConstant: 32).isActive = true
         buttonBackground.translatesAutoresizingMaskIntoConstraints = false
         return buttonBackground
@@ -93,10 +93,10 @@ class ProductCell: UICollectionViewCell {
     
     private lazy var cartIcon: UIImageView = {
         let cartIcon = UIImageView()
-        cartIcon.image = UIImage(systemName: "bag")?.withRenderingMode(.alwaysTemplate)
+        cartIcon.image = UIImage(named: "bag_biopet")?.withRenderingMode(.alwaysTemplate)
         cartIcon.tintColor = .white
-        cartIcon.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        cartIcon.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        cartIcon.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        cartIcon.widthAnchor.constraint(equalToConstant: 13.33).isActive = true
         cartIcon.translatesAutoresizingMaskIntoConstraints = false
         return cartIcon
     }()
@@ -111,29 +111,10 @@ class ProductCell: UICollectionViewCell {
     }()
     
     private lazy var cartTextAndButtonStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [cartText, cartButtonBackground])
+        let stackView = UIStackView(arrangedSubviews: [cartIcon, cartText])
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
         stackView.spacing = 4
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var ratingStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [ratingIcon, ratingPointText])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 4
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private lazy var textAndRatingLabelStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [productPriceText, productNameText, ratingStackView])
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = 4
-        stackView.translatesAutoresizingMaskIntoConstraints = false 
         return stackView
     }()
     
@@ -148,7 +129,10 @@ class ProductCell: UICollectionViewCell {
         mainBackground.addSubview(productBackground)
         productBackground.addSubview(productImage)
         productBackground.addSubview(heartIcon)
-        productBackground.addSubview(textAndRatingLabelStackView)
+        productBackground.addSubview(productPriceText)
+        productBackground.addSubview(productNameText)
+        productBackground.addSubview(ratingIcon)
+        productBackground.addSubview(ratingPointText)
         productBackground.addSubview(cartButtonBackground)
         cartButtonBackground.addSubview(cartTextAndButtonStackView)
         
@@ -164,25 +148,36 @@ class ProductCell: UICollectionViewCell {
             productImage.centerYAnchor.constraint(equalTo: productBackground.centerYAnchor),
             
             heartIcon.topAnchor.constraint(equalTo: productBackground.topAnchor, constant: 8),
-            heartIcon.trailingAnchor.constraint(equalTo: productBackground.trailingAnchor, constant: 8),
+            heartIcon.trailingAnchor.constraint(equalTo: productBackground.trailingAnchor, constant: -8),
             
-            textAndRatingLabelStackView.topAnchor.constraint(equalTo: productBackground.bottomAnchor, constant: 12),
-            textAndRatingLabelStackView.leadingAnchor.constraint(equalTo: mainBackground.leadingAnchor, constant: 12),
-            textAndRatingLabelStackView.trailingAnchor.constraint(equalTo: mainBackground.trailingAnchor, constant: -12),
+            productPriceText.topAnchor.constraint(equalTo: productBackground.bottomAnchor, constant: 4),
+            productPriceText.leadingAnchor.constraint(equalTo: productBackground.leadingAnchor, constant: 8),
             
-            cartButtonBackground.topAnchor.constraint(equalTo: textAndRatingLabelStackView.bottomAnchor, constant: 12),
-            cartButtonBackground.leadingAnchor.constraint(equalTo: textAndRatingLabelStackView.leadingAnchor),
-            cartButtonBackground.trailingAnchor.constraint(equalTo: textAndRatingLabelStackView.trailingAnchor, constant: -12),
+            productNameText.topAnchor.constraint(equalTo: productPriceText.bottomAnchor, constant: 8),
+            productNameText.leadingAnchor.constraint(equalTo: productPriceText.leadingAnchor),
+            productNameText.trailingAnchor.constraint(equalTo: productPriceText.trailingAnchor),
+            
+            ratingIcon.topAnchor.constraint(equalTo: productNameText.bottomAnchor, constant: 8),
+            ratingIcon.leadingAnchor.constraint(equalTo: productNameText.leadingAnchor),
+            
+            ratingPointText.topAnchor.constraint(equalTo: ratingIcon.topAnchor),
+            ratingPointText.leadingAnchor.constraint(equalTo: ratingIcon.trailingAnchor, constant: 4),
+            
+            cartButtonBackground.topAnchor.constraint(equalTo: ratingIcon.bottomAnchor, constant: 12),
+            cartButtonBackground.leadingAnchor.constraint(equalTo: mainBackground.leadingAnchor, constant: 12),
+            cartButtonBackground.trailingAnchor.constraint(equalTo: mainBackground.trailingAnchor, constant: -12),
+            cartButtonBackground.bottomAnchor.constraint(equalTo: mainBackground.bottomAnchor, constant: -16),
         
             cartTextAndButtonStackView.centerYAnchor.constraint(equalTo: cartButtonBackground.centerYAnchor),
             cartTextAndButtonStackView.centerXAnchor.constraint(equalTo: cartButtonBackground.centerXAnchor),
-            cartTextAndButtonStackView.bottomAnchor.constraint(equalTo: mainBackground.bottomAnchor, constant: -12),
+            cartTextAndButtonStackView.heightAnchor.constraint(equalToConstant: 16),
         ])
     }
     
     func configure(with: ProductModel) {
         productPriceText.text = with.price
         productImage.image = UIImage(named: with.image)
+        productNameText.text = with.name
         ratingPointText.text = with.rating
     }
     

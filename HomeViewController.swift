@@ -196,6 +196,7 @@ class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 32
         layout.minimumInteritemSpacing = 12
+        layout.itemSize = CGSize(width: 100, height: 40)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(PetCell.self, forCellWithReuseIdentifier: "PetCell")
@@ -210,6 +211,7 @@ class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
         layout.minimumInteritemSpacing = 12
+        layout.itemSize = CGSize(width: 164, height: 312)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell")
@@ -233,6 +235,8 @@ class HomeViewController: UIViewController {
         configureUI()
         configureConstraints()
         getCategoryItems()
+        getPetItems()
+        getProducts()
         filterProducts()
     }
     
@@ -317,10 +321,12 @@ class HomeViewController: UIViewController {
             petCollectionView.topAnchor.constraint(equalTo: choosenProductLabelDescription.bottomAnchor, constant: 12),
             petCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
             petCollectionView.heightAnchor.constraint(equalToConstant: 40),
+            petCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             productCollectionView.topAnchor.constraint(equalTo: petCollectionView.bottomAnchor, constant: 12),
             productCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
             productCollectionView.heightAnchor.constraint(equalToConstant: 312),
+            productCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     
@@ -342,6 +348,18 @@ class HomeViewController: UIViewController {
         let selectedCategory = pets[selectedPetIndex].category
         filteredProducts = allProducts.filter { $0.category == selectedCategory }
         productCollectionView.reloadData()
+    }
+    
+    private func getPetItems() {
+        guard let url = Bundle.main.url(forResource: "Pet", withExtension: "json") else {
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            pets = try JSONDecoder().decode([Pet].self, from: data)
+        } catch {
+            print("== \(error.localizedDescription) ==")
+        }
     }
     
     private func getProducts() {

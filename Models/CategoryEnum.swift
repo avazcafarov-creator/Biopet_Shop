@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum Category: Codable {
-    case cat
-    case dog
-    case bird
-    case fish
+enum Category: String, Codable {
+    case cat = "cat"
+    case dog = "dog"
+    case bird = "bird"
+    case fish = "fish"
 }

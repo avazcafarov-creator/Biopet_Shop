@@ -1,14 +1,14 @@
 [
     {
         "name": "Karamel",
-        "petType": "cat"
+        "category": "cat"
     },
     {
         "name": "Vini Junior",
-        "petType": "bird"
+        "category": "bird"
     },
     {
         "name": "Yetim",
-        "petType": "dog"
+        "category": "dog"
     }
 ]
