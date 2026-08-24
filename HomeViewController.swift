@@ -311,6 +311,10 @@ class HomeViewController: UIViewController {
             
             arrowIconImageView.centerXAnchor.constraint(equalTo: arrowBackgroundView.centerXAnchor),
             arrowIconImageView.centerYAnchor.constraint(equalTo: arrowBackgroundView.centerYAnchor),
+            
+            petCollectionView.topAnchor.constraint(equalTo: choosenProductLabelDescription.bottomAnchor, constant: 12),
+            petCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
+            petCollectionView.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     

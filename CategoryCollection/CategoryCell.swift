@@ -34,11 +34,7 @@ class CategoryCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureUI()
         configureConstraints()
-    }
-    
-    private func configureUI() {
     }
     
     private func configureConstraints() {
