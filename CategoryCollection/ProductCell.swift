@@ -150,7 +150,7 @@ class ProductCell: UICollectionViewCell {
     private lazy var priceStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [productPriceText, oldPriceLabel])
         stack.axis = .horizontal
-        stack.spacing = 6
+        stack.spacing = 4
         stack.alignment = .firstBaseline
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -194,8 +194,8 @@ class ProductCell: UICollectionViewCell {
             discountBadge.widthAnchor.constraint(equalToConstant: 48),
             discountBadge.heightAnchor.constraint(equalToConstant: 24),
             
-            productPriceText.topAnchor.constraint(equalTo: productBackground.bottomAnchor, constant: 4),
-            productPriceText.leadingAnchor.constraint(equalTo: productBackground.leadingAnchor, constant: 8),
+            priceStackView.topAnchor.constraint(equalTo: productBackground.bottomAnchor, constant: 4),
+            priceStackView.leadingAnchor.constraint(equalTo: productBackground.leadingAnchor, constant: 8),
             
             productNameText.topAnchor.constraint(equalTo: priceStackView.bottomAnchor, constant: 8),
             productNameText.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
@@ -219,6 +219,7 @@ class ProductCell: UICollectionViewCell {
     }
     
     func configure(with product: ProductModel) {
+        productNameText.text = product.name
         productPriceText.text = product.price + " AZN"
         productImage.image = UIImage(named: product.image)
         ratingPointText.text = product.rating
