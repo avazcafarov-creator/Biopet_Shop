@@ -11,7 +11,7 @@ class PetCell: UICollectionViewCell {
     private lazy var backgroundContainer: UIView = {
         let bc = UIView()
         bc.backgroundColor = .whiteBiopet
-        bc.layer.cornerRadius = 20
+        bc.clipsToBounds = true
         bc.translatesAutoresizingMaskIntoConstraints = false
         return bc
     }()
@@ -30,6 +30,11 @@ class PetCell: UICollectionViewCell {
         configureConstraints()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+                backgroundContainer.layer.cornerRadius = backgroundContainer.bounds.height / 2
+    }
+    
     private func configureConstraints() {
         addSubview(backgroundContainer)
         backgroundContainer.addSubview(petNameLabel)
@@ -38,8 +43,8 @@ class PetCell: UICollectionViewCell {
             backgroundContainer.topAnchor.constraint(equalTo: topAnchor),
             backgroundContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundContainer.heightAnchor.constraint(equalTo: heightAnchor),
-            backgroundContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
+            backgroundContainer.widthAnchor.constraint(equalTo: petNameLabel.widthAnchor, constant: 16),
+        
             petNameLabel.centerYAnchor.constraint(equalTo: backgroundContainer.centerYAnchor),
             petNameLabel.centerXAnchor.constraint(equalTo: backgroundContainer.centerXAnchor),
         ])
@@ -54,7 +59,7 @@ class PetCell: UICollectionViewCell {
             backgroundContainer.layer.shadowRadius = 4
             backgroundContainer.layer.shadowOffset = CGSize(width: 0, height: 2)
         } else {
-            backgroundContainer.backgroundColor = .whiteBiopet
+            backgroundContainer.backgroundColor = .clear
             backgroundContainer.layer.shadowOpacity = 0
         }
     }

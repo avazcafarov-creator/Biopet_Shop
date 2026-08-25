@@ -33,6 +33,7 @@ class ProductCell: UICollectionViewCell {
         imageView.image = UIImage(systemName: "heart")?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .neuralGray
         imageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

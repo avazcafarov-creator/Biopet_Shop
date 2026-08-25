@@ -191,21 +191,36 @@ class HomeViewController: UIViewController {
         return arrowIconImageView
     }()
     
-    private lazy var petCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 32
-        layout.minimumInteritemSpacing = 12
-        layout.itemSize = CGSize(width: 100, height: 40)
-        
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.register(PetCell.self, forCellWithReuseIdentifier: "PetCell")
-        cv.dataSource = self
-        cv.delegate = self
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
+    private lazy var petScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.showsHorizontalScrollIndicator = false
+        scroll.showsVerticalScrollIndicator = false
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
     }()
     
+    private lazy var petSelectorBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = .whiteBiopet
+        view.layer.cornerRadius = 20
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var petStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 4
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+
+    private lazy var petSelectorBackgroundWidthConstraint: NSLayoutConstraint = {
+        let constraint = petSelectorBackground.widthAnchor.constraint(equalTo: petStackView.widthAnchor, constant: 8)
+        constraint.priority = .defaultHigh
+        return constraint
+    }()
+
     private lazy var productCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -236,6 +251,7 @@ class HomeViewController: UIViewController {
         configureConstraints()
         getCategoryItems()
         getPetItems()
+        setupPetButtons()
         getProducts()
         filterProducts()
     }
@@ -261,7 +277,9 @@ class HomeViewController: UIViewController {
         view.addSubview(choosenProductTextLabelStackView)
         view.addSubview(arrowBackgroundView)
         arrowBackgroundView.addSubview(arrowIconImageView)
-        view.addSubview(petCollectionView)
+        view.addSubview(petSelectorBackground)
+        petSelectorBackground.addSubview(petScrollView)
+        petScrollView.addSubview(petStackView)
         view.addSubview(productCollectionView)
         
         NSLayoutConstraint.activate([
@@ -318,12 +336,24 @@ class HomeViewController: UIViewController {
             arrowIconImageView.centerXAnchor.constraint(equalTo: arrowBackgroundView.centerXAnchor),
             arrowIconImageView.centerYAnchor.constraint(equalTo: arrowBackgroundView.centerYAnchor),
             
-            petCollectionView.topAnchor.constraint(equalTo: choosenProductLabelDescription.bottomAnchor, constant: 12),
-            petCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
-            petCollectionView.heightAnchor.constraint(equalToConstant: 40),
-            petCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            petSelectorBackground.topAnchor.constraint(equalTo: choosenProductLabelDescription.bottomAnchor, constant: 12),
+            petSelectorBackground.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
+            petSelectorBackground.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -20),
+            petSelectorBackground.heightAnchor.constraint(equalToConstant: 40),
+            petSelectorBackgroundWidthConstraint,
             
-            productCollectionView.topAnchor.constraint(equalTo: petCollectionView.bottomAnchor, constant: 12),
+            petScrollView.topAnchor.constraint(equalTo: petSelectorBackground.topAnchor),
+            petScrollView.leadingAnchor.constraint(equalTo: petSelectorBackground.leadingAnchor),
+            petScrollView.trailingAnchor.constraint(equalTo: petSelectorBackground.trailingAnchor),
+            petScrollView.bottomAnchor.constraint(equalTo: petSelectorBackground.bottomAnchor),
+            
+            petStackView.topAnchor.constraint(equalTo: petScrollView.topAnchor, constant: 4),
+            petStackView.leadingAnchor.constraint(equalTo: petScrollView.leadingAnchor, constant: 4),
+            petStackView.trailingAnchor.constraint(equalTo: petScrollView.trailingAnchor, constant: -4),
+            petStackView.bottomAnchor.constraint(equalTo: petScrollView.bottomAnchor, constant: -4),
+            petStackView.heightAnchor.constraint(equalTo: petScrollView.heightAnchor, constant: -8),
+            
+            productCollectionView.topAnchor.constraint(equalTo: petStackView.bottomAnchor, constant: 12),
             productCollectionView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
             productCollectionView.heightAnchor.constraint(equalToConstant: 312),
             productCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -331,6 +361,32 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func profileButtonTapped() {
+    }
+    
+    private func setupPetButtons() {
+        petStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        for (index, pet) in pets.enumerated() {
+            let button = UIButton(type: .system)
+            button.setTitle(pet.name, for: .normal)
+            button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+            button.tag = index
+            button.addTarget(self, action: #selector(petButtonTapped(_:)), for: .touchUpInside)
+            
+            button.backgroundColor = (index == selectedPetIndex) ? .white : .clear
+            button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+            button.layer.cornerRadius = 16
+            button.clipsToBounds = true
+            
+            petStackView.addArrangedSubview(button)
+        }
+    }
+
+    @objc private func petButtonTapped(_ sender: UIButton) {
+        selectedPetIndex = sender.tag
+        setupPetButtons()
+        filterProducts()
     }
     
     private func getCategoryItems() {
@@ -376,11 +432,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == petCollectionView {
-            selectedPetIndex = indexPath.row
-            petCollectionView.reloadData()
-            filterProducts()
-        }
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
