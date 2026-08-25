@@ -236,6 +236,21 @@ class HomeViewController: UIViewController {
         return cv
     }()
     
+    private lazy var discountCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 12
+        layout.minimumInteritemSpacing = 12
+        layout.itemSize = CGSize(width: 164, height: 312)
+        
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell")
+        cv.dataSource = self
+        cv.delegate = self
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
+    
     var categoryItems: [CategoryModel] = []
     
     var pets: [Pet] = []
@@ -243,6 +258,8 @@ class HomeViewController: UIViewController {
     var allProducts: [ProductModel] = []
     var filteredProducts: [ProductModel] = []
     var selectedPetIndex: Int = 0
+    
+    var discountedProducts: [ProductModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -427,6 +444,11 @@ class HomeViewController: UIViewController {
         } catch {
             print("== \(error.localizedDescription) ==")
         }
+    }
+    
+    private func filterDiscountedProducts() {
+        discountedProducts = allProducts.filter { !$0.discountPercent.isEmpty }
+        discountCollectionView.reloadData()
     }
 }
 

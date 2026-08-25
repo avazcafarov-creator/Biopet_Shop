@@ -6,6 +6,8 @@
         "description": "Sosda tuna filesi, taxılsız, təbii tərkib.",
         "rating": "4.5",
         "price": "12.90",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-001"
     },
     {
@@ -15,6 +17,8 @@
         "description": "Balıqlı və toyuqlu qarışıq konservə yem.",
         "rating": "4.3",
         "price": "9.50",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-002"
     },
     {
@@ -24,6 +28,8 @@
         "description": "12 aya qədər pişik balaları üçün quru yem.",
         "rating": "4.7",
         "price": "38.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-003"
     },
     {
@@ -33,6 +39,8 @@
         "description": "Yetkin pişiklər üçün toyuqlu quru yem, 1.9 kg.",
         "rating": "4.2",
         "price": "22.40",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-004"
     },
     {
@@ -42,6 +50,8 @@
         "description": "İyə qarşı toplanan bentonit pişik qumu, 10L.",
         "rating": "4.6",
         "price": "15.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-005"
     },
     {
@@ -51,6 +61,8 @@
         "description": "Sterilizasiya olunmuş pişiklər üçün xüsusi formul.",
         "rating": "4.4",
         "price": "27.80",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-006"
     },
     {
@@ -60,6 +72,8 @@
         "description": "Tükləri təmizləyən vitaminli pasta, 50g.",
         "rating": "4.1",
         "price": "6.90",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-007"
     },
     {
@@ -69,6 +83,8 @@
         "description": "Catnip dolğulu oyuncaq siçan, pişiklər üçün.",
         "rating": "4.0",
         "price": "3.50",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "cat-008"
     },
     {
@@ -78,6 +94,8 @@
         "description": "Mal əti ilə yetkin itlər üçün quru yem, 3kg.",
         "rating": "4.3",
         "price": "24.90",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-001"
     },
     {
@@ -87,6 +105,8 @@
         "description": "Orta cinslər üçün küçük yaşı yemi.",
         "rating": "4.8",
         "price": "42.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-002"
     },
     {
@@ -96,6 +116,8 @@
         "description": "Həssas dərili itlər üçün losos əsaslı yem.",
         "rating": "4.6",
         "price": "48.50",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-003"
     },
     {
@@ -105,6 +127,8 @@
         "description": "Kiçik cins itlər üçün yumşaq konservə, 150g.",
         "rating": "4.2",
         "price": "5.20",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-004"
     },
     {
@@ -114,6 +138,8 @@
         "description": "Dayanıqlı rezin çeynəmə oyuncağı, orta ölçü.",
         "rating": "4.7",
         "price": "18.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-005"
     },
     {
@@ -123,6 +149,8 @@
         "description": "Nylon tənzimlənən boyunbağı, orta cinslər üçün.",
         "rating": "4.0",
         "price": "9.90",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-006"
     },
     {
@@ -132,6 +160,8 @@
         "description": "Diş sağlamlığı üçün çeynəmə çubuğu, 7 ədəd.",
         "rating": "4.4",
         "price": "7.60",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-007"
     },
     {
@@ -141,6 +171,8 @@
         "description": "Yaşlı itlər üçün oynaq dəstəkli xüsusi yem.",
         "rating": "4.9",
         "price": "55.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "dog-008"
     },
     {
@@ -150,6 +182,8 @@
         "description": "Kanareykalar üçün qarışıq toxum yemi, 1kg.",
         "rating": "4.5",
         "price": "11.20",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-001"
     },
     {
@@ -159,6 +193,8 @@
         "description": "Tutuquşular üçün vitaminli toxum qarışığı.",
         "rating": "4.3",
         "price": "9.80",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-002"
     },
     {
@@ -168,6 +204,8 @@
         "description": "Quşlar üçün kalsiumlu daş-çınqıl qarışığı.",
         "rating": "4.1",
         "price": "4.50",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-003"
     },
     {
@@ -177,6 +215,8 @@
         "description": "Taxta kiçik quş yuvası, asma tipli.",
         "rating": "4.6",
         "price": "14.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-004"
     },
     {
@@ -186,6 +226,8 @@
         "description": "Quşlar üçün su ilə qarışdırılan vitamin damcı.",
         "rating": "4.2",
         "price": "6.30",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-005"
     },
     {
@@ -195,6 +237,8 @@
         "description": "Balla örtülmüş toxum çubuğu, 2 ədəd.",
         "rating": "4.4",
         "price": "3.90",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-006"
     },
     {
@@ -204,6 +248,8 @@
         "description": "Taxta oturacaq çubuğu, qəfəs üçün.",
         "rating": "4.0",
         "price": "5.10",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-007"
     },
     {
@@ -213,6 +259,8 @@
         "description": "Kiçik ölçülü metal quş qəfəsi.",
         "rating": "4.7",
         "price": "32.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "bird-008"
     },
     {
@@ -222,6 +270,8 @@
         "description": "Bütün akvarium balıqları üçün pulcuqlu yem, 100ml.",
         "rating": "4.5",
         "price": "8.70",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-001"
     },
     {
@@ -231,6 +281,8 @@
         "description": "Tropik balıqlar üçün əsas pulcuqlu yem.",
         "rating": "4.3",
         "price": "7.40",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-002"
     },
     {
@@ -240,6 +292,8 @@
         "description": "Bütün akvarium balıqları üçün əsas qida, 250ml.",
         "rating": "4.6",
         "price": "10.90",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-003"
     },
     {
@@ -249,6 +303,8 @@
         "description": "Akvariumda yosun artımını azaldan məhlul.",
         "rating": "4.1",
         "price": "13.50",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-004"
     },
     {
@@ -258,6 +314,8 @@
         "description": "Kiçik akvariumlar üçün daxili su filtri.",
         "rating": "4.8",
         "price": "29.00",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-005"
     },
     {
@@ -267,6 +325,8 @@
         "description": "Çeşmə suyunu akvarium üçün hazırlayan damcı.",
         "rating": "4.4",
         "price": "6.20",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-006"
     },
     {
@@ -276,6 +336,8 @@
         "description": "Süni akvarium bitkisi, orta ölçü.",
         "rating": "4.0",
         "price": "4.80",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-007"
     },
     {
@@ -285,6 +347,74 @@
         "description": "Akvarium suyu üçün yapışqanlı termometr.",
         "rating": "4.2",
         "price": "2.90",
+        "oldPrice": "",
+        "discountPercent": "",
         "id": "fish-008"
+    },
+    {
+        "category": "cat",
+        "name": "Gemon Sterilised",
+        "image": "Gemon Sterilised",
+        "description": "Sterilizasiya olunmuş pişiklər üçün konservə yem, toyuqlu.",
+        "rating": "4.5",
+        "price": "40",
+        "oldPrice": "50",
+        "discountPercent": "20",
+        "id": "discount-001"
+    },
+    {
+        "category": "cat",
+        "name": "Monge Grill Senior Cat",
+        "image": "Monge Grill Senior Cat",
+        "description": "Yaşlı pişiklər üçün skumbriya əsaslı sousda yem, 85g.",
+        "rating": "4.5",
+        "price": "40",
+        "oldPrice": "50",
+        "discountPercent": "15",
+        "id": "discount-002"
+    },
+    {
+        "category": "dog",
+        "name": "Pedigree Vital Protection",
+        "image": "Pedigree Vital Protection",
+        "description": "Yetkin itlər üçün mal əti ilə quru yem, 2.5kg.",
+        "rating": "4.4",
+        "price": "36",
+        "oldPrice": "40",
+        "discountPercent": "10",
+        "id": "discount-003"
+    },
+    {
+        "category": "dog",
+        "name": "Cesar Classic Loaf",
+        "image": "Cesar Classic Loaf",
+        "description": "Kiçik cins itlər üçün mal əti və tərəvəzli konservə.",
+        "rating": "4.3",
+        "price": "9",
+        "oldPrice": "10",
+        "discountPercent": "10",
+        "id": "discount-004"
+    },
+    {
+        "category": "bird",
+        "name": "Vitakraft Sunflower Mix",
+        "image": "Vitakraft Sunflower Mix",
+        "description": "Tutuquşular üçün günəbaxan toxumu qarışığı, 800g.",
+        "rating": "4.2",
+        "price": "8.10",
+        "oldPrice": "9",
+        "discountPercent": "10",
+        "id": "discount-005"
+    },
+    {
+        "category": "fish",
+        "name": "Tetra Pro Colour",
+        "image": "Tetra Pro Colour",
+        "description": "Balıqların rəngini canlandıran premium pulcuqlu yem.",
+        "rating": "4.6",
+        "price": "9.60",
+        "oldPrice": "12",
+        "discountPercent": "20",
+        "id": "discount-006"
     }
 ]

@@ -55,6 +55,22 @@ class ProductCell: UICollectionViewCell {
         return productPrice
     }()
     
+    private lazy var discountedPrice: UILabel = {
+        let discountedPrice = UILabel()
+        discountedPrice.font = .systemFont(ofSize: 16, weight: .bold)
+        discountedPrice.textColor = .black
+        discountedPrice.translatesAutoresizingMaskIntoConstraints = false
+        return discountedPrice
+    }()
+    
+    private lazy var oldPriceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .neuralGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private lazy var productNameText: UILabel = {
         let productName = UILabel()
         productName.font = .systemFont(ofSize: 12, weight: .medium)
@@ -119,6 +135,27 @@ class ProductCell: UICollectionViewCell {
         return stackView
     }()
     
+    private lazy var discountBadge: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .bold)
+        label.textColor = .black
+        label.backgroundColor = .systemYellow
+        label.textAlignment = .center
+        label.layer.cornerRadius = 6
+        label.clipsToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var priceStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [productPriceText, oldPriceLabel])
+        stack.axis = .horizontal
+        stack.spacing = 6
+        stack.alignment = .firstBaseline
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -130,7 +167,8 @@ class ProductCell: UICollectionViewCell {
         mainBackground.addSubview(productBackground)
         productBackground.addSubview(productImage)
         productBackground.addSubview(heartIcon)
-        productBackground.addSubview(productPriceText)
+        productBackground.addSubview(discountBadge)
+        productBackground.addSubview(priceStackView)
         productBackground.addSubview(productNameText)
         productBackground.addSubview(ratingIcon)
         productBackground.addSubview(ratingPointText)
@@ -151,12 +189,17 @@ class ProductCell: UICollectionViewCell {
             heartIcon.topAnchor.constraint(equalTo: productBackground.topAnchor, constant: 8),
             heartIcon.trailingAnchor.constraint(equalTo: productBackground.trailingAnchor, constant: -8),
             
+            discountBadge.topAnchor.constraint(equalTo: productBackground.topAnchor, constant: 8),
+            discountBadge.leadingAnchor.constraint(equalTo: productBackground.leadingAnchor, constant: 8),
+            discountBadge.widthAnchor.constraint(equalToConstant: 48),
+            discountBadge.heightAnchor.constraint(equalToConstant: 24),
+            
             productPriceText.topAnchor.constraint(equalTo: productBackground.bottomAnchor, constant: 4),
             productPriceText.leadingAnchor.constraint(equalTo: productBackground.leadingAnchor, constant: 8),
             
-            productNameText.topAnchor.constraint(equalTo: productPriceText.bottomAnchor, constant: 8),
-            productNameText.leadingAnchor.constraint(equalTo: productPriceText.leadingAnchor),
-            productNameText.trailingAnchor.constraint(equalTo: productPriceText.trailingAnchor),
+            productNameText.topAnchor.constraint(equalTo: priceStackView.bottomAnchor, constant: 8),
+            productNameText.leadingAnchor.constraint(equalTo: priceStackView.leadingAnchor),
+            productNameText.trailingAnchor.constraint(equalTo: priceStackView.trailingAnchor),
             
             ratingIcon.topAnchor.constraint(equalTo: productNameText.bottomAnchor, constant: 8),
             ratingIcon.leadingAnchor.constraint(equalTo: productNameText.leadingAnchor),
@@ -175,11 +218,21 @@ class ProductCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with: ProductModel) {
-        productPriceText.text = with.price
-        productImage.image = UIImage(named: with.image)
-        productNameText.text = with.name
-        ratingPointText.text = with.rating
+    func configure(with product: ProductModel) {
+        productPriceText.text = product.price + " AZN"
+        productImage.image = UIImage(named: product.image)
+        ratingPointText.text = product.rating
+        
+        if product.discountPercent.isEmpty && product.oldPrice.isEmpty {
+            discountBadge.isHidden = true
+            oldPriceLabel.isHidden = true
+        } else {
+            discountBadge.text = "-\(product.discountPercent)%"
+            discountBadge.isHidden = false
+            oldPriceLabel.attributedText = NSAttributedString(string: "\(product.oldPrice) AZN", attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                                                                                                              .foregroundColor: UIColor.neuralGray] )
+            oldPriceLabel.isHidden = false
+        }
     }
     
     required init?(coder: NSCoder) {

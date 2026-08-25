@@ -14,5 +14,7 @@ struct ProductModel: Codable {
     let description: String
     let rating: String
     let price: String
+    let oldPrice: String
+    let discountPercent: String
     let id: String
 }
