@@ -8,79 +8,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    private lazy var bannerBackground: UIView = {
-        let bannerBackground = UIView()
-        bannerBackground.backgroundColor = .blueBiopet
-        bannerBackground.clipsToBounds = true
-        bannerBackground.layer.cornerRadius = 12
-        bannerBackground.heightAnchor.constraint(equalToConstant: 88).isActive = true
-        bannerBackground.translatesAutoresizingMaskIntoConstraints = false
-        return bannerBackground
-    }()
-
-    private lazy var bannerHeadText: UILabel = {
-        let bannerHeadText = UILabel()
-        bannerHeadText.text = "Bonus kartınız"
-        bannerHeadText.textColor = .white
-        bannerHeadText.font = .systemFont(ofSize: 16, weight: .medium)
-        bannerHeadText.translatesAutoresizingMaskIntoConstraints = false
-        return bannerHeadText
-    }()
-
-    private lazy var bannerBodyText: UILabel = {
-        let bannerBodyText = UILabel()
-        bannerBodyText.text = "Barkodu filiallarımızda satıcıya\ntəqdim edin."
-        bannerBodyText.textColor = .white
-        bannerBodyText.font = .systemFont(ofSize: 12, weight: .regular)
-        bannerBodyText.numberOfLines = 2
-        bannerBodyText.lineBreakMode = .byWordWrapping
-        bannerBodyText.translatesAutoresizingMaskIntoConstraints = false
-        return bannerBodyText
-    }()
-
-    private lazy var qrCodeBackgroundView: UIView = {
-        let qrCodeBackgroundView = UIView()
-        qrCodeBackgroundView.layer.cornerRadius = 8
-        qrCodeBackgroundView.backgroundColor = .blueBiopet
-        qrCodeBackgroundView.heightAnchor.constraint(equalToConstant: 56).isActive = true
-        qrCodeBackgroundView.widthAnchor.constraint(equalToConstant: 56).isActive = true
-        qrCodeBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        return qrCodeBackgroundView
-    }()
-
-    private lazy var heartIconBannerBackground: UIImageView = {
-        let heartIcon = UIImageView()
-        heartIcon.image = UIImage(named: "favorite_filled")?.withRenderingMode(.alwaysTemplate)
-        heartIcon.tintColor = .blueDark
-        heartIcon.contentMode = .scaleAspectFit
-        heartIcon.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        heartIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        heartIcon.transform = CGAffineTransform(rotationAngle: .pi / 5)
-        heartIcon.translatesAutoresizingMaskIntoConstraints = false
-        return heartIcon
-    }()
-
-    private lazy var cloudIconBannerBackground: UIImageView = {
-        let cloudIcon = UIImageView()
-        cloudIcon.image = UIImage(named: "cloud_filled")?.withRenderingMode(.alwaysTemplate)
-        cloudIcon.tintColor = .blueDark
-        cloudIcon.contentMode = .scaleAspectFit
-        cloudIcon.translatesAutoresizingMaskIntoConstraints = false
-        return cloudIcon
-    }()
-
-    private lazy var qrCodeImageView: UIImageView = {
-        let qrCodeImageView = UIImageView()
-        qrCodeImageView.image = UIImage(named: "scan_qr_filled")?
-            .withRenderingMode(.alwaysTemplate)
-        qrCodeImageView.tintColor = .white
-        qrCodeImageView.contentMode = .scaleAspectFit
-        qrCodeImageView.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        qrCodeImageView.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        qrCodeImageView.translatesAutoresizingMaskIntoConstraints = false
-        return qrCodeImageView
-    }()
-
     private lazy var choosenProductLabelHeadLine: UILabel = {
         let choosenProductHeadLine = UILabel()
         choosenProductHeadLine.text = "Seçilmiş məhsullar"
@@ -215,19 +142,6 @@ class HomeViewController: UIViewController {
     }
 
     private func configureConstraints() {
-        view.addSubview(profileIcon)
-        view.addSubview(notificationButton)
-        view.addSubview(searchBar)
-        searchBar.addSubview(searchBarImageView)
-        searchBar.addSubview(searchBarTextField)
-        view.addSubview(categoryCollectionView)
-        view.addSubview(bannerBackground)
-        bannerBackground.addSubview(heartIconBannerBackground)
-        bannerBackground.addSubview(cloudIconBannerBackground)
-        bannerBackground.addSubview(bannerHeadText)
-        bannerBackground.addSubview(bannerBodyText)
-        bannerBackground.addSubview(qrCodeBackgroundView)
-        qrCodeBackgroundView.addSubview(qrCodeImageView)
         view.addSubview(choosenProductTextLabelStackView)
         view.addSubview(arrowBackgroundView)
         arrowBackgroundView.addSubview(arrowIconImageView)
@@ -261,31 +175,6 @@ class HomeViewController: UIViewController {
             bannerBackground.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
             bannerBackground.trailingAnchor.constraint(equalTo: notificationButton.trailingAnchor),
             bannerBackground.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 24),
-
-            heartIconBannerBackground.topAnchor.constraint(equalTo: bannerBackground.topAnchor, constant: 12),
-            heartIconBannerBackground.leadingAnchor.constraint(equalTo: bannerBackground.leadingAnchor, constant: 112),
-
-            cloudIconBannerBackground.bottomAnchor.constraint(equalTo: bannerBackground.bottomAnchor),
-            cloudIconBannerBackground.topAnchor.constraint(equalTo: bannerBackground.topAnchor),
-            cloudIconBannerBackground.trailingAnchor.constraint(equalTo: bannerBackground.trailingAnchor),
-
-            bannerHeadText.topAnchor.constraint(equalTo: bannerBackground.topAnchor, constant: 16),
-            bannerHeadText.leadingAnchor.constraint(equalTo: bannerBackground.leadingAnchor, constant: 16),
-
-            bannerBodyText.topAnchor.constraint(equalTo: bannerHeadText.bottomAnchor, constant: 4),
-            bannerBodyText.leadingAnchor.constraint(equalTo: bannerHeadText.leadingAnchor),
-
-            qrCodeBackgroundView.centerYAnchor.constraint(equalTo: bannerBackground.centerYAnchor),
-            qrCodeBackgroundView.trailingAnchor.constraint(equalTo: bannerBackground.trailingAnchor, constant: -16),
-
-            qrCodeImageView.centerXAnchor.constraint(equalTo: qrCodeBackgroundView.centerXAnchor),
-            qrCodeImageView.centerYAnchor.constraint(equalTo: qrCodeBackgroundView.centerYAnchor),
-
-            choosenProductTextLabelStackView.topAnchor.constraint(equalTo: bannerBackground.bottomAnchor, constant: 24),
-            choosenProductTextLabelStackView.leadingAnchor.constraint(equalTo: profileIcon.leadingAnchor),
-
-            arrowBackgroundView.topAnchor.constraint(equalTo: choosenProductTextLabelStackView.topAnchor),
-            arrowBackgroundView.trailingAnchor.constraint(equalTo: bannerBackground.trailingAnchor),
 
             arrowIconImageView.centerXAnchor.constraint(equalTo: arrowBackgroundView.centerXAnchor),
             arrowIconImageView.centerYAnchor.constraint(equalTo: arrowBackgroundView.centerYAnchor),
