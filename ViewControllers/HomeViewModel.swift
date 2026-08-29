@@ -12,15 +12,16 @@ final class HomeViewModel {
     var categoryItems: [CategoryModel] = []
     var petItems: [Pet] = []
     var productItems: [ProductModel] = []
-
+    var filteredProducts: [ProductModel] = []
+    var selectedPetIndex: Int = 0
+    
     var onUpdate: (() -> Void)?
-
+    
     func getCategoryItems(completion: (() -> Void)) {
         guard let url = Bundle.main.url(forResource: "Category", withExtension: "json") else {return}
         do {
             let data = try Data(contentsOf: url)
             categoryItems = try JSONDecoder().decode([CategoryModel].self, from: data)
-//            onUpdate?()
             completion()
         } catch {
             print("== \(error.localizedDescription) ==")
@@ -33,7 +34,24 @@ final class HomeViewModel {
         items.append(.banner)
         if !petItems.isEmpty { items.append(.petFilter) }
         if !productItems.isEmpty { items.append(.products) }
-
+        
         onUpdate?()
+    }
+    
+    func filterProducts(filterProducts: (() -> Void)) {
+        let selectedCategory = petItems[selectedPetIndex].category
+        filteredProducts = productItems.filter { $0.category == selectedCategory }
+        filterProducts()
+    }
+    
+    func getProducts(getProducts: (() -> Void)) {
+        guard let url = Bundle.main.url(forResource: "Product", withExtension: "json") else {return}
+        do {
+            let data = try Data(contentsOf: url)
+            productItems = try JSONDecoder().decode([ProductModel].self, from: data)
+            getProducts()
+        } catch {
+            print("== \(error.localizedDescription) ==")
+        }
     }
 }

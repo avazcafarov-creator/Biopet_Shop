@@ -11,6 +11,7 @@ class PartnerCell: UICollectionViewCell {
     private var rectangleView: UIView = {
         let rv = UIView()
         rv.layer.cornerRadius = 12
+        rv.backgroundColor = .white
         rv.widthAnchor.constraint(equalToConstant: 164).isActive = true
         rv.heightAnchor.constraint(equalToConstant: 96).isActive = true
         rv.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +20,7 @@ class PartnerCell: UICollectionViewCell {
     
     private var imageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -43,6 +44,10 @@ class PartnerCell: UICollectionViewCell {
             imageView.centerXAnchor.constraint(equalTo: rectangleView.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: rectangleView.centerYAnchor),
         ])
+    }
+    
+    func configure(with: PartnerModel) {
+        imageView.image = UIImage(named: with.image)
     }
     
     required init?(coder: NSCoder) {

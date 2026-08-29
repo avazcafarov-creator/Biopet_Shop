@@ -100,7 +100,7 @@ class ProductCell: UICollectionViewCell {
     }()
     
     private lazy var cartButtonBackground: UIView = {
-       let buttonBackground = UIView()
+        let buttonBackground = UIView()
         buttonBackground.backgroundColor = .blueBiopet
         buttonBackground.layer.cornerRadius = 8
         buttonBackground.heightAnchor.constraint(equalToConstant: 32).isActive = true
@@ -211,7 +211,7 @@ class ProductCell: UICollectionViewCell {
             cartButtonBackground.leadingAnchor.constraint(equalTo: mainBackground.leadingAnchor, constant: 12),
             cartButtonBackground.trailingAnchor.constraint(equalTo: mainBackground.trailingAnchor, constant: -12),
             cartButtonBackground.bottomAnchor.constraint(equalTo: mainBackground.bottomAnchor, constant: -16),
-        
+            
             cartTextAndButtonStackView.centerYAnchor.constraint(equalTo: cartButtonBackground.centerYAnchor),
             cartTextAndButtonStackView.centerXAnchor.constraint(equalTo: cartButtonBackground.centerXAnchor),
             cartTextAndButtonStackView.heightAnchor.constraint(equalToConstant: 16),

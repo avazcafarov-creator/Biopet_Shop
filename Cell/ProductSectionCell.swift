@@ -24,6 +24,13 @@ class ProductSectionCell: UICollectionViewCell {
     }()
     
     var productItems: [ProductModel] = []
+    var filteredProducts: [ProductModel] = []
+    var discountedProducts: [ProductModel] = []
+    
+    private func filterDiscountedProducts() {
+            discountedProducts = productItems.filter { !$0.discountPercent.isEmpty }
+            productCollectionView.reloadData()
+        }
 }
 
 extension ProductSectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
