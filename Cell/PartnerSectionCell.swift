@@ -1,19 +1,18 @@
 //
-//  PetSectionCell.swift
+//  PartnerSectionCell.swift
 //  Biopet_Shop
 //
-//  Created by Avaz Cafarov on 28.08.26.
+//  Created by Avaz Cafarov on 29.08.26.
 //
 
 import UIKit
 
-class PetSectionCell: UICollectionViewCell {
+class PartnerSectionCell: UICollectionViewCell {
     private lazy var petCollectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
         layout.minimumInteritemSpacing = 12
-//        layout.itemSize = CGSize(width: , height: 40)
 
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(PetCell.self, forCellWithReuseIdentifier: "PetCell")
@@ -23,17 +22,16 @@ class PetSectionCell: UICollectionViewCell {
         return cv
     }()
     
-    var petItems: [Pet] = []
+    var partnerItems: [PartnerModel] = []
 }
 
-extension PetSectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension PartnerSectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        petItems.count
+        partnerItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PetCell", for: indexPath) as! PetCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartnerCell", for: indexPath) as! PartnerCell
         return cell
     }
 }
-

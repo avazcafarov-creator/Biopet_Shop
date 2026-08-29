@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Royal Canin",
+        "image": "royal_canin"
+    },
+    {
+        "name": "Purina",
+        "image": "purina"
+    },
+    {
+        "name": "Whiskas",
+        "image": "whiskas"
+    },
+    {
+        "name": "Pedigree",
+        "image": "pedigree"
+    },
+    {
+        "name": "Sanicat",
+        "image": "sanicat"
+    }
+]

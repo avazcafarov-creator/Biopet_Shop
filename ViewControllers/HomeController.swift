@@ -8,7 +8,6 @@
 import UIKit
 
 class HomeController: UIViewController {
-    private enum Section: Int, CaseIterable {
         case categories
         case banner
         case petFilter

@@ -23,7 +23,32 @@ class CategorySectionCell: UICollectionViewCell {
         return cv
     }()
     
-    var categoryItems: [CategoryModel] = []
+    private var categoryItems: [CategoryModel] = []
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureConstraints()
+    }
+    
+    private func configureConstraints() {
+        addSubview(categoryCollectionView)
+        
+        NSLayoutConstraint.activate([
+            categoryCollectionView.topAnchor.constraint(equalTo: topAnchor),
+            categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            categoryCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)])
+    }
+    
+    func configure(data: [CategoryModel]) {
+        categoryItems = data
+        categoryCollectionView.reloadData()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension CategorySectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -33,6 +58,7 @@ extension CategorySectionCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+        cell.configure(with: categoryItems[indexPath.item])
         return cell
     }
 }

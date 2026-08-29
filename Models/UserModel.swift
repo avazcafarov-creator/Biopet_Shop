@@ -16,10 +16,5 @@ struct User: Codable {
     let number: String
     let adress: String
     let id: String
-}
-
-enum userClass: String, Codable {
-    case standart = "Standart"
-    case gold = "Gold"
-    case premium = "Premium"
+    let pet: Pet
 }

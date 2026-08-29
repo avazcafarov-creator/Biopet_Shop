@@ -24,6 +24,8 @@ class BannerSectionCell: UICollectionViewCell {
     }()
     
     var bannerItems: [BannerCell] = []
+    
+    
 }
 
 extension BannerSectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
