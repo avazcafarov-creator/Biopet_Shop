@@ -90,6 +90,7 @@ class BannerCell: UICollectionViewCell {
         addSubview(bannerBackground)
         bannerBackground.addSubview(cloudIconBannerBackground)
         bannerBackground.addSubview(heartIconBannerBackground)
+        bannerBackground.addSubview(bannerHeadText)
         bannerBackground.addSubview(bannerBodyText)
         bannerBackground.addSubview(qrCodeBackgroundView)
         qrCodeBackgroundView.addSubview(qrCodeImageView)

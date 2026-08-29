@@ -28,16 +28,6 @@ final class HomeViewModel {
         }
     }
     
-    func buildSections() {
-        items = []
-        if !categoryItems.isEmpty { items.append(.categories) }
-        items.append(.banner)
-        if !petItems.isEmpty { items.append(.petFilter) }
-        if !productItems.isEmpty { items.append(.products) }
-        
-        onUpdate?()
-    }
-    
     func filterProducts(filterProducts: (() -> Void)) {
         let selectedCategory = petItems[selectedPetIndex].category
         filteredProducts = productItems.filter { $0.category == selectedCategory }
@@ -53,5 +43,14 @@ final class HomeViewModel {
         } catch {
             print("== \(error.localizedDescription) ==")
         }
+    }
+
+    func buildSections() {
+        items = []
+        if !categoryItems.isEmpty { items.append(.categories) }
+        items.append(.banner)
+        if !productItems.isEmpty { items.append(.products) }
+
+        onUpdate?()
     }
 }

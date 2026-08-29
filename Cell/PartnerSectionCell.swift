@@ -15,7 +15,7 @@ class PartnerSectionCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 12
 
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.register(PetCell.self, forCellWithReuseIdentifier: "PetCell")
+        cv.register(PartnerCell.self, forCellWithReuseIdentifier: "PartnerCell")
         cv.dataSource = self
         cv.delegate = self
         cv.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +23,14 @@ class PartnerSectionCell: UICollectionViewCell {
     }()
     
     var partnerItems: [PartnerModel] = []
+    
+    override init(frame: CGRect) {
+        super .init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension PartnerSectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
