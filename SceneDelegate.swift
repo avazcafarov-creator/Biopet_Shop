@@ -31,8 +31,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func showMainScreen() {
         let homeVC = HomeController()
-        let navigationController = UINavigationController(rootViewController: homeVC)
-        window?.rootViewController = navigationController
+        homeVC.tabBarItem = UITabBarItem(
+            title: "Ana Səhifə",
+            image: UIImage(named: "home"),
+            selectedImage: UIImage(named: "home_filled")
+        )
+        let homeNav = UINavigationController(rootViewController: homeVC)
+
+        let cartVC = CartViewController()
+        cartVC.tabBarItem = UITabBarItem(
+            title: "Səbət",
+            image: UIImage(named: "bag_biopet"),
+            selectedImage: UIImage(named: "bag_filled")
+        )
+        let cartNav = UINavigationController(rootViewController: cartVC)
+
+        let favoritesVC = FavoritesViewController()
+        favoritesVC.tabBarItem = UITabBarItem(
+            title: "Seçilmişlər",
+            image: UIImage(named: "heart"),
+            selectedImage: UIImage(named: "favorite_filled")
+        )
+        let favoritesNav = UINavigationController(rootViewController: favoritesVC)
+
+        let profileVC = ProfileViewController()
+        profileVC.tabBarItem = UITabBarItem(
+            title: "Profil",
+            image: UIImage(named: "User"),
+            selectedImage: UIImage(named: "profile_filled")
+        )
+        let profileNav = UINavigationController(rootViewController: profileVC)
+
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [homeNav, cartNav, favoritesNav, profileNav]
+        tabBarController.tabBar.tintColor = .blueBiopet
+
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 

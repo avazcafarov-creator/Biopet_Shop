@@ -1,17 +1,15 @@
 //
-//  ProfileViewController.swift
+//  CartViewController.swift
 //  Biopet_Shop
-//
-//  Created by Avaz Cafarov on 25.08.26.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class CartViewController: UIViewController {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Profil"
+        label.text = "Səbət"
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
