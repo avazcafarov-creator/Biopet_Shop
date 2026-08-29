@@ -1,16 +1,16 @@
 //
-//  PartnerSectionCell.swift
+//  ProductSectionCell.swift
 //  Biopet_Shop
 //
-//  Created by Avaz Cafarov on 29.08.26.
+//  Created by Avaz Cafarov on 28.08.26.
 //
 
 import UIKit
 
-class PartnerSectionCell: UICollectionViewCell {
+class DiscountSectionCell: UICollectionViewCell {
     private lazy var headTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Brendlər"
+        label.text = "Həftənin endirimləri"
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .black
         label.textAlignment = .left
@@ -20,11 +20,11 @@ class PartnerSectionCell: UICollectionViewCell {
     
     private lazy var descriptionTextLabel: UILabel = {
        let label = UILabel()
-        label.text = "Mağazamızda 50+ brend mövcuddur."
+        label.text = "Bütün heyvanlar üçün"
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .neuralGray
         label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false 
         return label
     }()
     
@@ -39,15 +39,15 @@ class PartnerSectionCell: UICollectionViewCell {
         return button
     }()
     
-    private lazy var petCollectionView: UICollectionView = {
+    private lazy var productCollectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
         layout.minimumInteritemSpacing = 12
-        layout.itemSize = CGSize(width: 164, height: 96)
+        layout.itemSize = CGSize(width: 164, height: 312)
 
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.register(PartnerCell.self, forCellWithReuseIdentifier: "PartnerCell")
+        cv.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell")
         cv.dataSource = self
         cv.delegate = self
         cv.showsHorizontalScrollIndicator = false
@@ -55,11 +55,12 @@ class PartnerSectionCell: UICollectionViewCell {
         return cv
     }()
     
-    var partnerItems: [PartnerModel] = []
+    var productItems: [ProductModel] = []
+    var filteredProducts: [ProductModel] = []
+    var discountedProducts: [ProductModel] = []
     
     override init(frame: CGRect) {
-        super .init(frame: frame)
-        
+        super.init(frame: frame)
         configureConstraints()
     }
     
@@ -68,7 +69,7 @@ class PartnerSectionCell: UICollectionViewCell {
         addSubview(nextButton)
         addSubview(headTextLabel)
         addSubview(descriptionTextLabel)
-        addSubview(petCollectionView)
+        addSubview(productCollectionView)
         
         NSLayoutConstraint.activate([
             nextButton.topAnchor.constraint(equalTo: topAnchor),
@@ -80,11 +81,11 @@ class PartnerSectionCell: UICollectionViewCell {
             
             descriptionTextLabel.topAnchor.constraint(equalTo: headTextLabel.bottomAnchor, constant: 4),
             descriptionTextLabel.leadingAnchor.constraint(equalTo: headTextLabel.leadingAnchor),
-        
-            petCollectionView.topAnchor.constraint(equalTo: descriptionTextLabel.bottomAnchor, constant: 12),
-            petCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            petCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            petCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            productCollectionView.topAnchor.constraint(equalTo: descriptionTextLabel.bottomAnchor, constant: 12),
+            productCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            productCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            productCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
     
@@ -92,22 +93,31 @@ class PartnerSectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Configure func for data
-    func configure(data: [PartnerModel]) {
-        partnerItems = data
-        petCollectionView.reloadData()
+    //MARK: - filtering discounted products
+    private func filterDiscountedProducts() {
+            discountedProducts = productItems.filter { !$0.discountPercent.isEmpty }
+            productCollectionView.reloadData()
+        }
+    
+    //MARK: - Configure func
+    func configure(product: [ProductModel]) {
+        productItems = product
+        filteredProducts = product
+        discountedProducts = product.filter { !$0.discountPercent.isEmpty }
+        productCollectionView.reloadData()
     }
 }
 
-//MARK: - PartnerSectionCell: DataSource & Delegate
-extension PartnerSectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//MARK: - DiscountSectionCell: DataSource && Delegate
+extension DiscountSectionCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        partnerItems.count
+        productItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartnerCell", for: indexPath) as! PartnerCell
-        cell.configure(with: partnerItems[indexPath.item])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
+        cell.configure(with: productItems[indexPath.item])
         return cell
     }
 }
+

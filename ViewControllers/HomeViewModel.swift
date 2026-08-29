@@ -13,7 +13,11 @@ final class HomeViewModel {
     var petItems: [Pet] = []
     var productItems: [ProductModel] = []
     var filteredProducts: [ProductModel] = []
+    var partnerItems: [PartnerModel] = []
     var selectedPetIndex: Int = 0
+    var discountedItems: [ProductModel] {
+        productItems.filter { !$0.discountPercent.isEmpty }
+    }
     
     var onUpdate: (() -> Void)?
     
@@ -44,12 +48,25 @@ final class HomeViewModel {
             print("== \(error.localizedDescription) ==")
         }
     }
+    
+    func getPartners(getPartners: (() -> Void)) {
+        guard let url = Bundle.main.url(forResource: "Partner", withExtension: "json") else {return}
+        do {
+            let data = try Data(contentsOf: url)
+            partnerItems = try JSONDecoder().decode([PartnerModel].self, from: data)
+            getPartners()
+        } catch {
+            print("== \(error.localizedDescription) ==")
+        }
+    }
 
     func buildSections() {
         items = []
         if !categoryItems.isEmpty { items.append(.categories) }
         items.append(.banner)
         if !productItems.isEmpty { items.append(.products) }
+        if !discountedItems.isEmpty { items.append(.discount) }
+        if !partnerItems.isEmpty { items.append(.partners) }
 
         onUpdate?()
     }

@@ -11,7 +11,7 @@ class PartnerCell: UICollectionViewCell {
     private var rectangleView: UIView = {
         let rv = UIView()
         rv.layer.cornerRadius = 12
-        rv.backgroundColor = .white
+        rv.backgroundColor = .init(named: "white_biopet")
         rv.widthAnchor.constraint(equalToConstant: 164).isActive = true
         rv.heightAnchor.constraint(equalToConstant: 96).isActive = true
         rv.translatesAutoresizingMaskIntoConstraints = false
@@ -41,8 +41,10 @@ class PartnerCell: UICollectionViewCell {
             rectangleView.leadingAnchor.constraint(equalTo: leadingAnchor),
             rectangleView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            imageView.centerXAnchor.constraint(equalTo: rectangleView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: rectangleView.centerYAnchor),
+            imageView.leadingAnchor.constraint(equalTo: rectangleView.leadingAnchor, constant: 16),
+            imageView.trailingAnchor.constraint(equalTo: rectangleView.trailingAnchor, constant: -16),
+            imageView.topAnchor.constraint(equalTo: rectangleView.topAnchor, constant: 16),
+            imageView.bottomAnchor.constraint(equalTo: rectangleView.bottomAnchor, constant: -16),
         ])
     }
     
