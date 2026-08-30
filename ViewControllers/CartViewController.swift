@@ -23,7 +23,7 @@ class CartViewController: UIViewController {
     
     private lazy var emptyIconBackground: UIView = {
         let iconBackground = UIView()
-        iconBackground.layer.cornerRadius = 40
+        iconBackground.layer.cornerRadius = 24
         iconBackground.backgroundColor = .whiteBiopet
         iconBackground.translatesAutoresizingMaskIntoConstraints = false
         return iconBackground
@@ -51,7 +51,7 @@ class CartViewController: UIViewController {
           let button = UIButton()
           button.setTitle("Alış-veriş et", for: .normal)
           button.setTitleColor(.white, for: .normal)
-          button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+          button.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
           button.backgroundColor = .blueBiopet
           button.layer.cornerRadius = 12
           button.translatesAutoresizingMaskIntoConstraints = false
@@ -90,17 +90,18 @@ class CartViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            emptyStateView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             
             emptyIconBackground.topAnchor.constraint(equalTo: emptyStateView.topAnchor),
             emptyIconBackground.centerXAnchor.constraint(equalTo: emptyStateView.centerXAnchor),
-            emptyIconBackground.widthAnchor.constraint(equalToConstant: 88),
-            emptyIconBackground.heightAnchor.constraint(equalToConstant: 88),
+            emptyIconBackground.widthAnchor.constraint(equalToConstant: 96),
+            emptyIconBackground.heightAnchor.constraint(equalToConstant: 96),
             
             emptyIconImageView.centerXAnchor.constraint(equalTo: emptyIconBackground.centerXAnchor),
             emptyIconImageView.centerYAnchor.constraint(equalTo: emptyIconBackground.centerYAnchor),
@@ -113,13 +114,13 @@ class CartViewController: UIViewController {
             shopButton.topAnchor.constraint(equalTo: emptyStateLabel.bottomAnchor, constant: 24),
             shopButton.leadingAnchor.constraint(equalTo: emptyStateView.leadingAnchor),
             shopButton.trailingAnchor.constraint(equalTo: emptyStateView.trailingAnchor),
-            shopButton.heightAnchor.constraint(equalToConstant: 52),
+            shopButton.heightAnchor.constraint(equalToConstant: 40),
             shopButton.bottomAnchor.constraint(equalTo: emptyStateView.bottomAnchor)
         ])
     }
     
     @objc private func shopButtonTapped() {
-        tabBarController?.selectedIndex = 0 
+        tabBarController?.selectedIndex = 0
     }
 
     private func updateUI() {
