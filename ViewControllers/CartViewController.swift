@@ -22,6 +22,14 @@ class CartViewController: UIViewController {
         return label
     }()
     
+    private lazy var descriptionLabel: UILabel = {
+        let desc = UILabel()
+        desc.font = .systemFont(ofSize: 12, weight: .regular)
+        desc.textColor = .neuralGray
+        desc.translatesAutoresizingMaskIntoConstraints = false
+        return desc
+    }()
+    
     private lazy var emptyStateView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -74,12 +82,15 @@ class CartViewController: UIViewController {
 
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(ProductSectionCell.self, forCellWithReuseIdentifier: "ProductSectionCell")
+        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "PlaceholderCell")
         cv.dataSource = self
         cv.delegate = self
         cv.showsVerticalScrollIndicator = false
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
+    
+    let viewModel = HomeViewModel()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -104,6 +115,7 @@ class CartViewController: UIViewController {
     
     private func configureConstraints() {
         view.addSubview(titleLabel)
+        view.addSubview(descriptionLabel)
         view.addSubview(emptyStateView)
         emptyStateView.addSubview(emptyIconBackground)
         emptyIconBackground.addSubview(emptyIconImageView)
@@ -114,12 +126,15 @@ class CartViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            descriptionLabel.firstBaselineAnchor.constraint(equalTo: titleLabel.firstBaselineAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8),
+            descriptionLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -16),
             
             emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            emptyStateView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            emptyStateView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             
             emptyIconBackground.topAnchor.constraint(equalTo: emptyStateView.topAnchor),
             emptyIconBackground.centerXAnchor.constraint(equalTo: emptyStateView.centerXAnchor),
@@ -154,8 +169,10 @@ class CartViewController: UIViewController {
     private func updateUI() {
         let isEmpty = CartViewModel.shared.items.isEmpty
         emptyStateView.isHidden = !isEmpty
-        titleLabel.text = isEmpty ? "Səbət" : "Səbət (\(CartViewModel.shared.items.count) məhsul)"
         collectionView.isHidden = isEmpty
+        titleLabel.text = "Səbət"
+        descriptionLabel.isHidden = isEmpty
+        descriptionLabel.text = "\(CartViewModel.shared.items.count) məhsul"
     }
 }
 
@@ -177,9 +194,10 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch CartSection(rawValue: indexPath.section)! {
             case .recommended:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductSectionCell", for: indexPath) as! ProductSectionCell
+            cell.configure(product: viewModel.productItems)
                 return cell
             default:
-                return UICollectionViewCell()
+                return collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath)
             }
     }
     
