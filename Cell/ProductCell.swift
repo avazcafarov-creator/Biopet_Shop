@@ -99,12 +99,13 @@ class ProductCell: UICollectionViewCell {
         return ratingPoint
     }()
     
-    private lazy var cartButtonBackground: UIView = {
-        let buttonBackground = UIView()
+    private lazy var cartButtonBackground: UIButton = {
+        let buttonBackground = UIButton()
         buttonBackground.backgroundColor = .blueBiopet
         buttonBackground.layer.cornerRadius = 8
         buttonBackground.heightAnchor.constraint(equalToConstant: 32).isActive = true
         buttonBackground.translatesAutoresizingMaskIntoConstraints = false
+        buttonBackground.addTarget(self, action: #selector(addToCartTapped), for: .touchUpInside)
         return buttonBackground
     }()
     
@@ -131,6 +132,7 @@ class ProductCell: UICollectionViewCell {
         let stackView = UIStackView(arrangedSubviews: [cartIcon, cartText])
         stackView.axis = .horizontal
         stackView.spacing = 4
+        stackView.isUserInteractionEnabled = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -156,6 +158,8 @@ class ProductCell: UICollectionViewCell {
         return stack
     }()
     
+    private var product: ProductModel?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -172,7 +176,7 @@ class ProductCell: UICollectionViewCell {
         productBackground.addSubview(productNameText)
         productBackground.addSubview(ratingIcon)
         productBackground.addSubview(ratingPointText)
-        productBackground.addSubview(cartButtonBackground)
+        mainBackground.addSubview(cartButtonBackground)
         cartButtonBackground.addSubview(cartTextAndButtonStackView)
         
         NSLayoutConstraint.activate([
@@ -219,6 +223,7 @@ class ProductCell: UICollectionViewCell {
     }
     
     func configure(with product: ProductModel) {
+        self.product = product
         productNameText.text = product.name
         productPriceText.text = product.price + " AZN"
         productImage.image = UIImage(named: product.image)
@@ -236,6 +241,13 @@ class ProductCell: UICollectionViewCell {
         }
     }
     
+    @objc private func addToCartTapped() {
+        guard let product else { return }
+           let newItem = CartItem(product: product, quantity: 1, isSelected: true)
+           CartViewModel.shared.items.append(newItem)
+           CartViewModel.shared.onUpdate?()
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
