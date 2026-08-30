@@ -82,6 +82,7 @@ class CartViewController: UIViewController {
 
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(ProductSectionCell.self, forCellWithReuseIdentifier: "ProductSectionCell")
+        cv.register(CartHeaderCell.self, forCellWithReuseIdentifier: "CartHeaderCell")
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "PlaceholderCell")
         cv.dataSource = self
         cv.delegate = self
@@ -156,8 +157,8 @@ class CartViewController: UIViewController {
             shopButton.bottomAnchor.constraint(equalTo: emptyStateView.bottomAnchor),
             
             collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -196,6 +197,11 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductSectionCell", for: indexPath) as! ProductSectionCell
             cell.configure(product: viewModel.productItems)
                 return cell
+        case .header:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CartHeaderCell", for: indexPath) as! CartHeaderCell
+            let item = CartViewModel.shared.items[indexPath.item]
+            cell.configure(with: item, index: indexPath.item)
+            return cell
             default:
                 return collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath)
             }
@@ -203,7 +209,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch CartSection(rawValue: indexPath.section)! {
-        case .header: return CGSize(width: collectionView.frame.width, height: 40)
+        case .header: return CGSize(width: collectionView.frame.width, height: 36)
         case .items: return CGSize(width: collectionView.frame.width, height: 120)
         case .summary: return CGSize(width: collectionView.frame.width, height: 140)
         case .recommended: return CGSize(width: collectionView.frame.width, height: 368)
