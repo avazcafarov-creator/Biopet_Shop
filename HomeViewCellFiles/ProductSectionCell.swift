@@ -97,7 +97,9 @@ class ProductSectionCell: UICollectionViewCell {
             productCollectionView.reloadData()
         }
     
-    func configure(product: [ProductModel]) {
+    func configure(product: [ProductModel], title: String = "Seçilmiş məhsullar", subtitle: String = "Sizin ev heyvanlarınız üçün") {
+        headTextLabel.text = title
+        descriptionTextLabel.text = subtitle
         productItems = product
         filteredProducts = product
         discountedProducts = product.filter { !$0.discountPercent.isEmpty }

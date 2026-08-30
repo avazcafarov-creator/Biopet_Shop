@@ -66,16 +66,16 @@ class CartHeaderCell: UICollectionViewCell {
         ])
     }
     
-    @objc private func checkboxTapped() {
-        guard let itemIndex else { return }
-        checkboxButton.isSelected.toggle()
-        CartViewModel.shared.items[itemIndex].isSelected.toggle()
-        CartViewModel.shared.onUpdate?()
+    func configure(allSelected: Bool) {
+        checkboxButton.isSelected = allSelected
     }
-    
-    func configure(with item: CartItem, index: Int) {
-        itemIndex = index
-        checkboxButton.isSelected = item.isSelected
+
+    @objc private func checkboxTapped() {
+        let shouldSelectAll = !checkboxButton.isSelected
+        for i in CartViewModel.shared.items.indices {
+            CartViewModel.shared.items[i].isSelected = shouldSelectAll
+        }
+        CartViewModel.shared.onUpdate?()
     }
     
     required init?(coder: NSCoder) {

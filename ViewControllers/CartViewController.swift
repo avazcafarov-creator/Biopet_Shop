@@ -104,7 +104,11 @@ class CartViewController: UIViewController {
         
         configureUI()
         configureConstraints()
-        
+
+        viewModel.getProducts { [weak self] in
+            self?.collectionView.reloadData()
+        }
+
         CartViewModel.shared.onUpdate = { [weak self] in
             self?.updateUI()
         }
@@ -195,12 +199,16 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch CartSection(rawValue: indexPath.section)! {
             case .recommended:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductSectionCell", for: indexPath) as! ProductSectionCell
-            cell.configure(product: viewModel.productItems)
+            cell.configure(
+                product: viewModel.productItems,
+                title: "Bunlar da xoşunuza gələ bilər",
+                subtitle: "Təklif olunan məhsullar"
+            )
                 return cell
         case .header:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CartHeaderCell", for: indexPath) as! CartHeaderCell
-            let item = CartViewModel.shared.items[indexPath.item]
-            cell.configure(with: item, index: indexPath.item)
+                let allSelected = !CartViewModel.shared.items.isEmpty && CartViewModel.shared.items.allSatisfy { $0.isSelected }
+                cell.configure(allSelected: allSelected)
             return cell
             default:
                 return collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath)
