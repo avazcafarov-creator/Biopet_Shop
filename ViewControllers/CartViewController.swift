@@ -6,6 +6,13 @@
 import UIKit
 
 class CartViewController: UIViewController {
+    private enum CartSection: Int, CaseIterable {
+        case header
+        case items
+        case summary
+        case recommended
+    }
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Səbət"
@@ -58,6 +65,21 @@ class CartViewController: UIViewController {
           button.addTarget(self, action: #selector(shopButtonTapped), for: .touchUpInside)
           return button
       }()
+    
+    private lazy var collectionView: UICollectionView = {
+       let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 24
+        layout.minimumInteritemSpacing = 12
+
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(ProductSectionCell.self, forCellWithReuseIdentifier: "ProductSectionCell")
+        cv.dataSource = self
+        cv.delegate = self
+        cv.showsVerticalScrollIndicator = false
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
+    }()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -87,6 +109,7 @@ class CartViewController: UIViewController {
         emptyIconBackground.addSubview(emptyIconImageView)
         emptyStateView.addSubview(emptyStateLabel)
         emptyStateView.addSubview(shopButton)
+        view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -105,8 +128,8 @@ class CartViewController: UIViewController {
             
             emptyIconImageView.centerXAnchor.constraint(equalTo: emptyIconBackground.centerXAnchor),
             emptyIconImageView.centerYAnchor.constraint(equalTo: emptyIconBackground.centerYAnchor),
-            emptyIconImageView.widthAnchor.constraint(equalToConstant: 36),
-            emptyIconImageView.heightAnchor.constraint(equalToConstant: 36),
+            emptyIconImageView.widthAnchor.constraint(equalToConstant: 48),
+            emptyIconImageView.heightAnchor.constraint(equalToConstant: 48),
             
             emptyStateLabel.topAnchor.constraint(equalTo: emptyIconBackground.bottomAnchor, constant: 16),
             emptyStateLabel.centerXAnchor.constraint(equalTo: emptyStateView.centerXAnchor),
@@ -115,7 +138,12 @@ class CartViewController: UIViewController {
             shopButton.leadingAnchor.constraint(equalTo: emptyStateView.leadingAnchor),
             shopButton.trailingAnchor.constraint(equalTo: emptyStateView.trailingAnchor),
             shopButton.heightAnchor.constraint(equalToConstant: 40),
-            shopButton.bottomAnchor.constraint(equalTo: emptyStateView.bottomAnchor)
+            shopButton.bottomAnchor.constraint(equalTo: emptyStateView.bottomAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -127,5 +155,40 @@ class CartViewController: UIViewController {
         let isEmpty = CartViewModel.shared.items.isEmpty
         emptyStateView.isHidden = !isEmpty
         titleLabel.text = isEmpty ? "Səbət" : "Səbət (\(CartViewModel.shared.items.count) məhsul)"
+        collectionView.isHidden = isEmpty
+    }
+}
+
+extension CartViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        CartSection.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch CartSection(rawValue: section)! {
+        case .header: return 1
+        case .items: return CartViewModel.shared.items.count
+        case .recommended: return 1
+        case .summary: return 1
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch CartSection(rawValue: indexPath.section)! {
+            case .recommended:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductSectionCell", for: indexPath) as! ProductSectionCell
+                return cell
+            default:
+                return UICollectionViewCell()
+            }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch CartSection(rawValue: indexPath.section)! {
+        case .header: return CGSize(width: collectionView.frame.width, height: 40)
+        case .items: return CGSize(width: collectionView.frame.width, height: 120)
+        case .summary: return CGSize(width: collectionView.frame.width, height: 140)
+        case .recommended: return CGSize(width: collectionView.frame.width, height: 368)
+        }
     }
 }
