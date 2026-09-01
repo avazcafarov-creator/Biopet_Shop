@@ -83,6 +83,8 @@ class CartViewController: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(ProductSectionCell.self, forCellWithReuseIdentifier: "ProductSectionCell")
         cv.register(CartHeaderCell.self, forCellWithReuseIdentifier: "CartHeaderCell")
+        cv.register(CartItemCell.self, forCellWithReuseIdentifier: "CartItemCell")
+        cv.register(CartSummaryCell.self, forCellWithReuseIdentifier: "CartSummaryCell")
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "PlaceholderCell")
         cv.dataSource = self
         cv.delegate = self
@@ -113,7 +115,7 @@ class CartViewController: UIViewController {
             self?.updateUI()
         }
     }
-    
+
     private func configureUI() {
         view.backgroundColor = .white
     }
@@ -178,6 +180,7 @@ class CartViewController: UIViewController {
         titleLabel.text = "Səbət"
         descriptionLabel.isHidden = isEmpty
         descriptionLabel.text = "\(CartViewModel.shared.items.count) məhsul"
+        collectionView.reloadData()
     }
 }
 
@@ -210,16 +213,23 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
                 let allSelected = !CartViewModel.shared.items.isEmpty && CartViewModel.shared.items.allSatisfy { $0.isSelected }
                 cell.configure(allSelected: allSelected)
             return cell
-            default:
-                return collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath)
+        case .items:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CartItemCell", for: indexPath) as! CartItemCell
+            let item = CartViewModel.shared.items[indexPath.item]
+            cell.configure(with: item, index: indexPath.item)
+            return cell
+            case .summary:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CartSummaryCell", for: indexPath) as! CartSummaryCell
+                cell.configure(with: CartViewModel.shared.items)
+                return cell
             }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch CartSection(rawValue: indexPath.section)! {
         case .header: return CGSize(width: collectionView.frame.width, height: 36)
-        case .items: return CGSize(width: collectionView.frame.width, height: 120)
-        case .summary: return CGSize(width: collectionView.frame.width, height: 140)
+        case .items: return CGSize(width: collectionView.frame.width, height: 140)
+        case .summary: return CGSize(width: collectionView.frame.width, height: 180)
         case .recommended: return CGSize(width: collectionView.frame.width, height: 368)
         }
     }
