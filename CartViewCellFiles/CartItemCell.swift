@@ -183,7 +183,7 @@ class CartItemCell: UICollectionViewCell {
             checkboxButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             checkboxButton.widthAnchor.constraint(equalToConstant: 20),
             checkboxButton.heightAnchor.constraint(equalToConstant: 20),
-
+            
             priceLabel.topAnchor.constraint(equalTo: topAnchor),
             priceLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 12),
 

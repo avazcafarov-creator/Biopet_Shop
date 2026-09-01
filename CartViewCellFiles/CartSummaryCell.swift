@@ -13,7 +13,7 @@ class CartSummaryCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Yekun"
@@ -22,18 +22,17 @@ class CartSummaryCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private lazy var productsRow = makeRow()
     private lazy var discountRow = makeRow()
-    private lazy var premiumRow = makeRow()
-
+    
     private lazy var divider: UIView = {
         let view = UIView()
         view.backgroundColor = .neuralGray.withAlphaComponent(0.2)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     private lazy var totalTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Cəmi"
@@ -42,7 +41,7 @@ class CartSummaryCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private lazy var totalValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .bold)
@@ -50,41 +49,41 @@ class CartSummaryCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private lazy var mainStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [titleLabel, productsRow, discountRow, premiumRow, divider, totalRow])
+        let stack = UIStackView(arrangedSubviews: [titleLabel, productsRow, discountRow, divider, totalRow])
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 12
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-
+    
     private lazy var totalRow: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [totalTitleLabel, totalValueLabel])
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
         return stack
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func makeRow() -> UIStackView {
         let titleLabel = UILabel()
-        titleLabel.font = .systemFont(ofSize: 13, weight: .regular)
+        titleLabel.font = .systemFont(ofSize: 12, weight: .regular)
         titleLabel.textColor = .black
-
+        
         let valueLabel = UILabel()
-        valueLabel.font = .systemFont(ofSize: 13, weight: .medium)
+        valueLabel.font = .systemFont(ofSize: 12, weight: .medium)
         valueLabel.textColor = .black
         valueLabel.textAlignment = .right
-
+        
         let stack = UIStackView(arrangedSubviews: [titleLabel, valueLabel])
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
@@ -115,12 +114,10 @@ class CartSummaryCell: UICollectionViewCell {
         let subtotal = items.reduce(0.0) { $0 + (Double($1.product.price) ?? 0) * Double($1.quantity) }
         let oldSubtotal = items.reduce(0.0) { $0 + (Double($1.product.oldPrice) ?? Double($1.product.price) ?? 0) * Double($1.quantity) }
         let discount = max(0, oldSubtotal - subtotal)
-        let premiumDiscount = subtotal * 0.30
-        let total = subtotal - premiumDiscount
+        let total = subtotal
 
         setRow(productsRow, title: "Məhsullar (\(count) ədəd)", value: format(subtotal))
         setRow(discountRow, title: "Endirim", value: "- \(format(discount))")
-        setRow(premiumRow, title: "Premium endirimi  🛡 +30%", value: "- \(format(premiumDiscount))")
         totalValueLabel.text = format(total)
     }
 

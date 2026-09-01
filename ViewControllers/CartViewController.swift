@@ -229,7 +229,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch CartSection(rawValue: indexPath.section)! {
         case .header: return CGSize(width: collectionView.frame.width, height: 36)
         case .items: return CGSize(width: collectionView.frame.width, height: 140)
-        case .summary: return CGSize(width: collectionView.frame.width, height: 180)
+        case .summary: return CGSize(width: collectionView.frame.width, height: 150)
         case .recommended: return CGSize(width: collectionView.frame.width, height: 368)
         }
     }
